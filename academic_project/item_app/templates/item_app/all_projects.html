@@ -6,11 +6,11 @@
             <div class="vertical-container">
             {% for project in projects_list %}
                 <div class="horizontal-container">
-                    <span class="align-vertical"><img src="{{project.snapshot.url}}"> </span>
-                    <span class="align-vertical">name :{{project.name}}</span>
-                    <span class="align-vertical">keyword :{{project.keyword_list}}</span>
-                    <span class="align-vertical">likes :{{project.likes}}</span>
-                    <span class="align-vertical"><a href="{% url 'project-detail' project.id %}">details</a></span>
+                    <div class="align-vertical"><img src="{{project.snapshot.url}}"> </div>
+                    <div class="align-vertical">name :{{project.name}}</div>
+                    <div class="align-vertical">keyword :{{project.keyword_list}}</div>
+                    <div class="align-vertical">likes :{{project.likes}}</div>
+                    <div class="align-vertical"><a href="{% url 'project-detail' project.id %}">details</a></div>
                 </div>
             {% endfor %}
             </div>
