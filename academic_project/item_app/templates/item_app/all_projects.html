@@ -1,0 +1,22 @@
+{% extends "super.html" %}
+
+	{% block content %}
+        <h2>All Projects</h2>
+        {% if projects_list %}
+            <div class="vertical-container">
+            {% for project in projects_list %}
+                <div class="horizontal-container">
+                    <span class="align-vertical"><img src="{{project.snapshot.url}}"> </span>
+                    <span class="align-vertical">name :{{project.name}}</span>
+                    <span class="align-vertical">keyword :{{project.keyword_list}}</span>
+                    <span class="align-vertical">likes :{{project.likes}}</span>
+                    <span class="align-vertical"><a href="{% url 'project-detail' project.id %}">details</a></span>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <p>No projects are available.</p>
+        {% endif %}
+
+
+    {% endblock %}

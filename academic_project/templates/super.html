@@ -1,0 +1,48 @@
+
+<!DOCTYPE HTML>
+<html lang="en-CA">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="menu bar">
+		<meta name="author" content="Yibhir">
+		{% load static %}
+	<link 	rel ="stylesheet"
+		  	type="text/css"
+		  	href="{% static 'css/styles.css' %}">
+
+	  <title>Medicine Projects</title>
+
+	</head>
+	<body>
+		<header>
+			<span><img src="{% static 'images/sun.png' %}"></span>
+			<nav>
+				<ul>
+
+					<li><a href="{% url 'home' %}" title="services">Home</a></li>
+					<li><a href="#" title="About">About</a></li>
+					<li><a href="#" title="Users">Users</a></li>
+					<li><a href="{% url 'all-projects' %}" title="Projects"> Projects</a></li>
+					<li><a href="#" title="Messages">Messages</a></li>
+
+				</ul>
+			</nav>
+			<nav>
+				<span><a class="main_urls" href="#" title="Login">Login</a></span>
+				<span><a class="main_urls" href="#" title="Login">Register</a></span>
+			</nav>
+
+		</header>
+		<div>
+			{% block content %}
+
+			{% endblock%}
+		</div>
+	<footer>
+		<p>Students</p>
+
+		<p>&copy; Copyright 2021 @<a href="https://www.dawsoncollege.qc.ca/">Dawson</a></s></p>
+
+	</footer>
+	</body>
+</html>
