@@ -28,8 +28,15 @@
 				</ul>
 			</nav>
 			<nav>
-				<span><a class="main_urls"  class="main_urls" href="{% url 'user-login' %}" title="Login">Login</a></span>
-				<span><a class="main_urls"  class="main_urls" href="{% url 'user-register' %}" title="register">Register</a></span>
+				{% if user.is_authenticated %}
+					<span class="greet_user" >Hello {{user}} </span>
+					<span><a class="main_urls"  href="#" title="Profile">Profile</a></span>
+					<span><a  class="main_urls" href="{% url 'user-logout' %}" title="logout">Logout</a></span>
+				{% else %}
+					<span class="greet_user">Hello Guest</span>
+					<span><a  class="main_urls" href="{% url 'user-login' %}" title="Login">Login</a></span>
+					<span><a  class="main_urls" href="{% url 'user-register' %}" title="register">Register</a></span>
+				{% endif %}
 			</nav>
 
 		</header>

@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'academic_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        #'NAME': DB_NAME,
-        #'USER': DB_USER,
-        #'PASSWORD': DB_PASSWORD,
+        # 'NAME': DB_NAME,
+        # 'USER': DB_USER,
+        # 'PASSWORD': DB_PASSWORD,
         'NAME': 'python_django',
         'USER': 'postgres',
         'PASSWORD': 'project',
@@ -135,3 +135,5 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'home'
