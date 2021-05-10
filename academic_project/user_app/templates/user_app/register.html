@@ -1,0 +1,23 @@
+{% extends "super.html" %}
+
+	{% block content %}
+
+        <section class="form-container">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token%}
+                <fieldset class="form-content">
+                    <legend>Registration</legend>
+                    {{register_form}}
+                    {{file_form}}
+
+                </fieldset>
+                <span class="btn-post">
+                    <button  type="submit">Sign Up</button>
+                </span>
+
+            </form>
+            <span>Already have an account <a href="{% url 'user-login' %}" >Login</a></span>
+
+        </section>
+
+    {% endblock %}

@@ -74,6 +74,11 @@ footer{
     margin: 0;
     vertical-align:middle;
     width: 100%;
-
 }
 
+.form-container{width:60%; margin:auto;display:flex; flex-direction: column;align-items: center;}
+.form-content{display:flex; flex-direction: column; align-items: center; justify-content: space-between; }
+.helptext ul {display:flex; flex-direction: column;}
+.helptext {color:red; display:flex; flex-direction: column;align-items: center;}
+.form-container form {display:flex; flex-direction: column;align-items: center;}
+.btn-post button{ background-color: green; border: 1px solid green; border-radius: 0.2em; }

@@ -34,10 +34,4 @@ class Project(models.Model):
         return "Project " + str(self.id)
 
 
-# The Comment class defines the attributes corresponding to the project. This includes
-# the comment itself and the date.
-# @author Yassine Ibhir/David Pizzolongo
-class Comment(models.Model):
-    comment = models.CharField(max_length=200)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=timezone.now)
+

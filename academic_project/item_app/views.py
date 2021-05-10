@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render
-from .models import Project, Comment
+from .models import Project
 
 from django.views import generic
 
@@ -13,8 +13,8 @@ def home(request):
 
 
 class ProjectListView(generic.ListView):
-    template_name = 'item_app/all_projects.html'
-    context_object_name = 'projects_list'
+    template_name = 'item_app/project_list.html'
+    context_object_name = 'project_list'
 
     def get_queryset(self):
         return Project.objects.all()

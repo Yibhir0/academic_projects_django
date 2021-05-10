@@ -22,22 +22,27 @@
 					<li><a class="main_urls" href="{% url 'home' %}" title="services">Home</a></li>
 					<li><a class="main_urls"  href="#" title="About">About</a></li>
 					<li><a class="main_urls"  href="#" title="Users">Users</a></li>
-					<li><a class="main_urls"  href="{% url 'all-projects' %}" title="Projects"> Projects</a></li>
+					<li><a class="main_urls"  href="{% url 'project-list' %}" title="Projects"> Projects</a></li>
 					<li><a class="main_urls"  href="#" title="Messages">Messages</a></li>
 
 				</ul>
 			</nav>
 			<nav>
-				<span><a class="main_urls"  class="main_urls" href="#" title="Login">Login</a></span>
-				<span><a class="main_urls"  class="main_urls" href="#" title="Login">Register</a></span>
+				<span><a class="main_urls"  class="main_urls" href="{% url 'user-login' %}" title="Login">Login</a></span>
+				<span><a class="main_urls"  class="main_urls" href="{% url 'user-register' %}" title="register">Register</a></span>
 			</nav>
 
 		</header>
-		<div>
+		   {% if messages %}
+				{% for msg in  messages %}
+					<div class="messages-{{ msg.tags}}"> {{ msg }} </div>
+				{% endfor %}
+        	{% endif %}
+
 			{% block content %}
 
 			{% endblock%}
-		</div>
+
 	<footer>
 		<p>Students</p>
 
