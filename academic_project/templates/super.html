@@ -3,14 +3,18 @@
 <html lang="en-CA">
 	<head>
 		<meta charset="utf-8">
+
+		{% block heading %}
 		<meta name="description" content="menu bar">
 		<meta name="author" content="Yibhir">
+		{% endblock heading %}
+
 		{% load static %}
 	<link 	rel ="stylesheet"
 		  	type="text/css"
 		  	href="{% static 'css/styles.css' %}">
 
-	  <title>Academic Project</title>
+	  <title>Academic Projects</title>
 
 	</head>
 	<body>
@@ -46,10 +50,11 @@
 				{% endfor %}
         	{% endif %}
 
+		<div>
 			{% block content %}
 
 			{% endblock%}
-
+		</div>
 	<footer>
 		<p>Students</p>
 

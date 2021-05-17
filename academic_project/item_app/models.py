@@ -11,6 +11,22 @@ def checkRating(rating):
     if rating > 5:
         raise ValidationError("Rating cannot exceed 5 stars.")
 
+# def getDefaultRating(likes):
+#     default_rating = 0
+#     likesNum = int(likes)
+#
+#     if likesNum >= 8:
+#         default_rating = 5
+#     elif likesNum >= 6:
+#         default_rating = 4
+#     elif likesNum >= 4:
+#         default_rating = 3
+#     elif likesNum >= 2:
+#         default_rating = 2
+#     elif likesNum == 1:
+#         default_rating = 1
+#
+#     return default_rating
 
 # The Project class contains projects published by one or many members.
 # Its entities include the project name, type, keyword_list and status, as well as
@@ -23,12 +39,12 @@ from django.contrib.auth.models import User
 
 class Project(models.Model):
     member = models.ForeignKey(User, on_delete=models.CASCADE)
-    avg_rating = models.DecimalField(default=0, decimal_places=1, max_digits=2, validators=[checkRating])
     likes = models.PositiveIntegerField(default=0)
+    avg_rating = models.DecimalField(default=0, decimal_places=1, max_digits=2, validators=[checkRating])
     name = models.CharField(max_length=40)
     project_type = models.CharField(max_length=35)
-    keyword_list = models.CharField(max_length=30)
-    description = models.TextField(max_length=60, blank=True)
+    keyword_list = models.CharField(max_length=70)
+    description = models.TextField(max_length=100, blank=True)
     url = models.URLField(blank=True)
     status = models.CharField(max_length=15, help_text="Ex: Started, In Progress or Completed")
     post_date = models.DateTimeField(default=timezone.now)

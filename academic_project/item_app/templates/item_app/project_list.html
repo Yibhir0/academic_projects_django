@@ -15,7 +15,7 @@
             <div class="vertical-container">
             {% for project in project_list %}
                 <div class="horizontal-container">
-                    <div class="align-vertical"><img src="{{project.snapshot.url}}"> </div>
+                    <div class="align-vertical"><img id="projImages" src="{{project.snapshot.url}}"> </div>
                     <div class="align-vertical">Name :{{project.name}}</div>
                     <div class="align-vertical">Keyword :{{project.keyword_list}}</div>
                     <div class="align-vertical">User :{{project.member}}</div>

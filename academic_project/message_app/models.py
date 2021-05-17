@@ -4,7 +4,6 @@ from item_app.models import Project
 from django.contrib.auth.models import User
 
 
-# Create your models here.
 # The Comment class defines the attributes corresponding to the project. This includes
 # the comment itself and the date.
 # @author Yassine Ibhir/David Pizzolongo

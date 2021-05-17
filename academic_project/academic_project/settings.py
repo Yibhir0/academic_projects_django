@@ -78,12 +78,12 @@ WSGI_APPLICATION = 'academic_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': DB_NAME,
-        # 'USER': DB_USER,
-        # 'PASSWORD': DB_PASSWORD,
-        'NAME': 'academic_project',
-        'USER': 'postgres',
-        'PASSWORD': 'project',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        # 'NAME': 'academic_project',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'project',
         'HOST': 'localhost',
         'PORT': '5432',
     }

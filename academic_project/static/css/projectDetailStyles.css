@@ -1,0 +1,87 @@
+#mainContainer {
+    margin-top: 1%;
+    margin-left: 30%;
+    width: 40%;
+    font-size: 17px;
+    display: flex;
+    align-items: flex-start;
+}
+
+#mainContainer, #projectDescrip {
+    flex: 1;
+    padding: 10px;
+}
+
+#projectDescrip{
+    margin-left: 20px;
+}
+
+#ratingContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+h2{
+    color: #e60707;
+}
+
+#importantInfo{
+    text-decoration: underline;
+}
+
+.stars{
+    padding: 0px;
+    font-size: 1.5em;
+    color: #eeb209;
+}
+
+#newRating{
+    margin-top: 10px;
+}
+
+#rating{
+    color: darkgoldenrod;
+    margin: 0;
+}
+
+#projImg{
+    height: 8.7em;
+    width: 8.7em;
+}
+
+#likePara{
+    color: #ff4000;
+}
+
+#buttons{
+    display: flex;
+}
+
+.buttons{
+    width: 49px;
+    height: 39px;
+    border-radius: 4.5px;
+    margin-top: 10px;
+}
+
+#ratingBtn{
+    background: #ffe000bf;
+    width: 100px;
+}
+
+#likeBtn, #ratingBtn {
+    background: #ffe000;
+    border: solid 1px #ff4000;
+    color: #ff4000;
+    margin-right: 2.5em;
+}
+
+#flagBtn{
+    background: #4e46cf;
+    border: solid 1px #ff00ba;
+    color: #ff00ba;
+}
+
+#projectURL{
+    margin-top: 40px;
+}
