@@ -23,8 +23,10 @@
 					<li><a class="main_urls"  href="#" title="About">About</a></li>
 					<li><a class="main_urls"  href="#" title="Users">Users</a></li>
 					<li><a class="main_urls"  href="{% url 'project-list' %}" title="Projects"> Projects</a></li>
-					<li><a class="main_urls"  href="#" title="Messages">Messages</a></li>
-
+					{% if user.is_authenticated %}
+						<li><a class="main_urls"  href="{% url 'memberProject-list' %}" title="memberProjects">My Projects</a></li>
+						<li><a class="main_urls"  href="#" title="Messages">Messages</a></li>
+					{% endif %}
 				</ul>
 			</nav>
 			<nav>
@@ -44,7 +46,7 @@
 				{% for msg in  messages %}
 					<div class="messages-{{ msg.tags}}"> {{ msg }} </div>
 				{% endfor %}
-        	{% endif %}
+			{% endif %}
 
 			{% block content %}
 
