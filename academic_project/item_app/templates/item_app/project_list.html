@@ -1,22 +1,49 @@
 {% extends "super.html" %}
 
 	{% block content %}
-        <h2>All Projects</h2>
+          <div class="projects-heading">
+                <h2>{{ page_obj.paginator.count }} Projects</h2>
+                <a href="#">Add Project</a>
+                <form action="{% url 'search-list' %}" method="GET">
+                    <input name="qry-search" type="text" placeholder="keyword">
+                </form>
+
+            </div>
+
         {% if project_list %}
+
             <div class="vertical-container">
             {% for project in project_list %}
                 <div class="horizontal-container">
                     <div class="align-vertical"><img src="{{project.snapshot.url}}"> </div>
-                    <div class="align-vertical">name :{{project.name}}</div>
-                    <div class="align-vertical">keyword :{{project.keyword_list}}</div>
-                    <div class="align-vertical">likes :{{project.likes}}</div>
+                    <div class="align-vertical">Name :{{project.name}}</div>
+                    <div class="align-vertical">Keyword :{{project.keyword_list}}</div>
+                    <div class="align-vertical">User :{{project.member}}</div>
                     <div class="align-vertical"><a href="{% url 'project-detail' project.id %}">details</a></div>
                 </div>
             {% endfor %}
             </div>
+            <section class="pages-content">
+                {% if is_paginated %}
+
+                     <span >
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}....
+                     </span>
+
+                     {% if page_obj.has_previous %}
+                            <span><a href="?page={{ page_obj.previous_page_number }}"><=Previous</a></span>
+                     {% endif %}
+                     {% if page_obj.has_next %}
+                            <span><a href="?page={{ page_obj.next_page_number }}">Next=></a></span>
+                     {% endif %}
+
+
+                {% endif %}
+
+            </section>
         {% else %}
             <p>No projects are available.</p>
         {% endif %}
 
 
-    {% endblock %}
+        {% endblock %}

@@ -12,5 +12,5 @@ from django.contrib.auth.models import User
 class Comment(models.Model):
     comment = models.CharField(max_length=200)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    member = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)

@@ -4,7 +4,7 @@ body {
    margin:0;
    padding:0;
    font-family: 'Titillium Web', sans-serif;
-   min-width:400px;
+   min-width:1000px;
 
 }
 
@@ -51,7 +51,7 @@ footer{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    position: relative;
+    position: fixed;
     bottom:0;
     color: white;
 }
@@ -78,10 +78,12 @@ footer{
     width: 100%;
 }
 
-.form-container{width:60%; margin:auto;display:flex; flex-direction: column;align-items: center;}
+.form-container{width:40%; margin:auto;display:flex; flex-direction: column;align-items: center;}
 .form-content{display:flex; flex-direction: column; align-items: center; justify-content: space-between; }
 .helptext ul {display:flex; flex-direction: column;}
 .helptext {color:red; display:flex; flex-direction: column;align-items: center;}
 .form-container form {display:flex; flex-direction: column;align-items: center;}
 .btn-post button{ background-color: green; border: 1px solid green; border-radius: 0.2em; }
-nav .greet_user { color:white;}
+ nav .greet_user { color:white;}
+ .pages-content {margin:auto;display:flex;align-items: center;}
+ .projects-heading{display: flex;align-items: center;justify-content: space-between;}
