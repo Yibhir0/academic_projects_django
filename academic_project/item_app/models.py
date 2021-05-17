@@ -16,8 +16,13 @@ def checkRating(rating):
 # Its entities include the project name, type, keyword_list and status, as well as
 # other optional fields.
 # @author Yassine Ibhir/David Pizzolongo
+from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+
+
 class Project(models.Model):
-    # member = models.ForeignKeyField(Member, on_delete=models.CASCADE)
+    member = models.ForeignKey(User, on_delete=models.CASCADE)
     avg_rating = models.DecimalField(default=0, decimal_places=1, max_digits=2, validators=[checkRating])
     likes = models.PositiveIntegerField(default=0)
     name = models.CharField(max_length=40)
@@ -32,6 +37,3 @@ class Project(models.Model):
     def __str__(self):
         # returns the project id assigned automatically
         return "Project " + str(self.id)
-
-
-

@@ -81,7 +81,7 @@ DATABASES = {
         # 'NAME': DB_NAME,
         # 'USER': DB_USER,
         # 'PASSWORD': DB_PASSWORD,
-        'NAME': 'python_django',
+        'NAME': 'academic_project',
         'USER': 'postgres',
         'PASSWORD': 'project',
         'HOST': 'localhost',
