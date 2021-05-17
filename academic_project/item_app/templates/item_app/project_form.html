@@ -3,19 +3,17 @@
 	{% block content %}
 
         <section class="form-container">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token%}
                 <fieldset class="form-content">
-                    <legend>Login</legend>
+                    <legend>{{legend}}</legend>
                     {{form}}
-
                 </fieldset>
                 <span class="btn-post">
-                    <button  type="submit">Log in</button>
+                    <button  type="submit"> {{btn}} </button>
                 </span>
 
             </form>
-            <span>Don't have an account <a href="{% url 'user-register' %}">Sign Up</a></span>
 
         </section>
 

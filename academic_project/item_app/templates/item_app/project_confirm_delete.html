@@ -3,19 +3,18 @@
 	{% block content %}
 
         <section class="form-container">
-            <form method="post">
+            <form method="post" >
                 {% csrf_token%}
                 <fieldset class="form-content">
-                    <legend>Login</legend>
-                    {{form}}
-
+                    <legend>Delete Project</legend>
+                    <h2>Are you sure you want to delete {{object.name}}</h2>
                 </fieldset>
                 <span class="btn-post">
-                    <button  type="submit">Log in</button>
+                    <button  type="submit">Yes, Delete</button>
+                    <a href="{% url 'memberProject-list' %}">No, Cancel</a>
                 </span>
 
             </form>
-            <span>Don't have an account <a href="{% url 'user-register' %}">Sign Up</a></span>
 
         </section>
 
