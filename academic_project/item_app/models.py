@@ -35,5 +35,4 @@ class Project(models.Model):
     snapshot = models.ImageField(upload_to='project_images', default='project_default_pic.png')
 
     def __str__(self):
-        # returns the project id assigned automatically
-        return "Project " + str(self.id)
+        return self.name

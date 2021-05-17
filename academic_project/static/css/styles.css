@@ -1,4 +1,4 @@
-
+/** Yassine Ibhir **/
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@1,300&display=swap');
 body {
    margin:0;
@@ -78,12 +78,14 @@ footer{
     width: 100%;
 }
 
+#id_description{max-width:300px; max-height:20px;}
+
 .form-container{width:40%; margin:auto;display:flex; flex-direction: column;align-items: center;}
-.form-content{display:flex; flex-direction: column; align-items: center; justify-content: space-between; }
+.form-content{display:flex; flex-direction: column; align-items: center; justify-content: space-evenly; }
 .helptext ul {display:flex; flex-direction: column;}
 .helptext {color:red; display:flex; flex-direction: column;align-items: center;}
 .form-container form {display:flex; flex-direction: column;align-items: center;}
 .btn-post button{ background-color: green; border: 1px solid green; border-radius: 0.2em; }
  nav .greet_user { color:white;}
- .pages-content {margin:auto;display:flex;align-items: center;}
- .projects-heading{display: flex;align-items: center;justify-content: space-between;}
+.pages-content {margin:auto;display:flex;align-items: center;}
+.projects-heading{display: flex;align-items: center;justify-content: space-between;}
