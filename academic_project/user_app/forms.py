@@ -13,6 +13,11 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
 
+    def __init__(self, *args, **kwargs):
+        super(UserRegistrationForm, self).__init__(*args, **kwargs)
+
+        self.fields['password1'].help_text = "8+ Characters long"
+
 
 class MemberFileForm(forms.ModelForm):
     class Meta:
