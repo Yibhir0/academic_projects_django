@@ -1,5 +1,4 @@
 {% extends "super.html" %}
-<!-- restrict access to view, redirect to login -->
 <head>
     {% block heading %}
         <meta name="description"  content="Project View">
@@ -42,16 +41,20 @@
             <p id="likePara">Number of likes: {{ project.likes }}</p>
 
             <div id="buttons">
-                <button aria-label="Click to like project" class="buttons" id="likeBtn" type="submit">Like</button>
-                <button aria-label="Click to submit rating" class="buttons" id="ratingBtn" type="submit">Submit Rating</button>
-                <button aria-label="Click to flag project" class="buttons" id="flagBtn" type="submit">Flag</button>
+                {% if user.is_authenticated %}
+                <button aria-label="Click to like project" class="buttons" id="likeBtn" type="submit" href="{% url 'update-likes' project.id %}">Like</button>
+                <button aria-label="Click to submit rating" class="buttons" id="ratingBtn" type="submit" href="{% url 'update-rating' project.id  %}">Submit Rating</button>
+                {% endif %}
+
+                {% if user.is_superuser %}
+
+                <button aria-label="Click to flag project" class="buttons" id="flagBtn" type="submit">Flag</button> <!-- add view to change status -->
+                {% endif %}
             </div>
 
             <p id="projectURL"> Go to <a href="{{ project.url }}"> Project URL. </a> </p>
       </section>
     </div>
-            <!-- {% if project.member.is_authenticated %}-->
 
-            <!-- {% endif %} -->
     {% endblock content %}
 </body>

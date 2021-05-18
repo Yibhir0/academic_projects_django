@@ -22,7 +22,7 @@ def register(request):
                 customer_profile = Member.objects.create(user=new_customer)
 
             customer_profile.save()
-            messages.success(request, 'Gongratulations {0}, You are registered'.format(username))
+            messages.success(request, 'Congratulations {0}, You are registered'.format(username))
             return redirect('user-login')
     else:
         register_form = UserRegistrationForm()

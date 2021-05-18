@@ -1,0 +1,23 @@
+{% extends "super.html" %}
+
+	{% block content %}
+
+        <section class="form-container">
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token%}
+                <fieldset class="form-content">
+                    <legend>Enter new rating</legend>
+
+                    {{form}}
+
+                    <p>Current rating: {{ project.rating }}</p>
+                </fieldset>
+
+                <button type="submit" id="btn">Update Project</button>
+
+            </form>
+
+        </section>
+
+    {% endblock %}

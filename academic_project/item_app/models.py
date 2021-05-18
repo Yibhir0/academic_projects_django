@@ -1,42 +1,21 @@
 from django.core.validators import ValidationError
+from django.utils import timezone
 from django.db import models
 from django.utils import timezone
-
+from django.contrib.auth.models import User
 
 # This method validates that the user rating is a positive decimal number and it is not greater than 5 (maximum).
 # @author David Pizzolongo
 def checkRating(rating):
     if rating < 0:
         raise ValidationError("Rating can only be a positive number.")
-    if rating > 5:
+    elif rating > 5:
         raise ValidationError("Rating cannot exceed 5 stars.")
 
-# def getDefaultRating(likes):
-#     default_rating = 0
-#     likesNum = int(likes)
-#
-#     if likesNum >= 8:
-#         default_rating = 5
-#     elif likesNum >= 6:
-#         default_rating = 4
-#     elif likesNum >= 4:
-#         default_rating = 3
-#     elif likesNum >= 2:
-#         default_rating = 2
-#     elif likesNum == 1:
-#         default_rating = 1
-#
-#     return default_rating
-
-# The Project class contains projects published by one or many members.
-# Its entities include the project name, type, keyword_list and status, as well as
+# The Project model contains projects published by a member.
+# Its entities include the member's name, project name, type, keyword_list and status, as well as
 # other optional fields.
 # @author Yassine Ibhir/David Pizzolongo
-from django.db import models
-from django.utils import timezone
-from django.contrib.auth.models import User
-
-
 class Project(models.Model):
     member = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.PositiveIntegerField(default=0)
@@ -53,3 +32,19 @@ class Project(models.Model):
     def __str__(self):
         # returns the project id assigned automatically
         return "Project " + str(self.id)
+
+    # could we use get_absolute_url???
+
+# The Comment class holds the foreign key entities from the Project and User models,
+# and a comment field that holds the user's message. The __str__ method
+# displays the member's name.
+# @author David Pizzolongo
+class Comment(models.Model):
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    member_name = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=250)
+    date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        # returns the member's name
+        return str(self.member_name)
