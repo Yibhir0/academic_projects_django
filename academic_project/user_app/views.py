@@ -24,7 +24,10 @@ def register(request):
             customer_profile.save()
             messages.success(request, 'Gongratulations {0}, You are registered'.format(username))
             return redirect('user-login')
+        else :
+            messages.error(request, "Unsuccessful registration. Invalid information.")
     else:
+
         register_form = UserRegistrationForm()
         file_form = MemberFileForm()
     template_name = 'user_app/register.html'

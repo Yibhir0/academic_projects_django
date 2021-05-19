@@ -42,6 +42,7 @@
 			</nav>
 
 		</header>
+		<main class="content">
 		   {% if messages %}
 				{% for msg in  messages %}
 					<div class="messages-{{ msg.tags}}"> {{ msg }} </div>
@@ -51,7 +52,7 @@
 			{% block content %}
 
 			{% endblock%}
-
+		</main>
 	<footer>
 		<p>Students</p>
 
