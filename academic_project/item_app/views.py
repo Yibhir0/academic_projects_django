@@ -1,4 +1,6 @@
+from urllib import request
 
+from django.contrib import messages
 from django.shortcuts import render
 from .models import Project
 from django.urls import reverse_lazy
@@ -23,7 +25,7 @@ class ProjectListView(ListView):
     model = Project
     template_name = 'item_app/project_list.html'
     context_object_name = 'project_list'
-    paginate_by = 4
+    paginate_by = 6
 
     def get_queryset(self):
         return Project.objects.all()
@@ -47,15 +49,39 @@ class searchProjectKeyWord(ListView):
     model = Project
     template_name = 'item_app/project_list.html'
     context_object_name = 'project_list'
-    paginate_by = 4
 
     def get_queryset(self):
+
         keyword_text = self.request.GET.get('qry-search')
+
         projects = Project.objects.filter(keyword_list__icontains=keyword_text)
         if len(projects) > 0:
+            messages.success(self.request, 'Found {0}, matching'.format(len(projects)))
             return projects
         else:
-            return Project.objects.all()
+            messages.warning(self.request, 'Search did not match any text {0}'.format(keyword_text))
+            return projects
+
+
+# Yassine Ibhir
+# Class based View  searches and renders projects of the logged in user
+
+class searchMemberProjectKeyWord(ListView):
+    model = Project
+    template_name = 'item_app/memberProject_list.html'
+    context_object_name = 'project_list'
+
+    def get_queryset(self):
+
+        keyword_text = self.request.GET.get('qry-search')
+
+        projects = Project.objects.filter(keyword_list__icontains=keyword_text)
+        if len(projects) > 0:
+            messages.success(self.request, 'Found {0}, matching'.format(len(projects)))
+            return projects
+        else:
+            messages.warning(self.request, 'Search did not match any text {0}'.format(keyword_text))
+            return projects
 
 
 # Yassine Ibhir
@@ -66,7 +92,7 @@ class ProjectMemberListView(ListView):
     model = Project
     template_name = 'item_app/memberProject_list.html'
     context_object_name = 'project_list'
-    paginate_by = 4
+    paginate_by = 6
 
     def get_queryset(self):
         login_member = self.request.user
