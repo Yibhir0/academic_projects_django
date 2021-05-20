@@ -8,6 +8,11 @@
                 {% endif %}
                 <form action="{% url 'search-list' %}" method="GET">
                     <input name="qry-search" type="text" placeholder="keyword">
+                    <select name="options">
+                         <option value="keyword">keyword</option>
+                         <option value="name">Name</option>
+                         <option value="owner">Owner</option>
+                     </select>
                 </form>
 
             </div>
@@ -20,7 +25,7 @@
                     <span class="align-vertical"><img src="{{project.snapshot.url}}"> </span>
                     <span class="align-vertical">Name :{{project.name}}</span>
                     <span class="align-vertical">Keyword :{{project.keyword_list}}</span>
-                    <span class="align-vertical">User :{{project.member}}</span>
+                    <span class="align-vertical">Owner :{{project.member}}</span>
                     <span class="align-vertical"><a href="{% url 'project-detail' project.id %}">details</a></span>
                 </div>
             {% endfor %}
