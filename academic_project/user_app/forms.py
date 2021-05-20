@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from .models import Member
 
 
+# Yassine Ibhir
+# This class creates a form for user registration
 class UserRegistrationForm(UserCreationForm):
     email = forms.CharField(max_length=100, required=True)
     first_name = forms.CharField(max_length=100, required=False)
@@ -21,6 +23,8 @@ class UserRegistrationForm(UserCreationForm):
         self.fields['password1'].help_text = "8+ Characters long"
 
 
+# Yassine Ibhir
+# This class creates a forr for user profile picture
 class MemberFileForm(forms.ModelForm):
     class Meta:
         model = Member

@@ -44,8 +44,8 @@
 		</header>
 		<main class="content">
 		   {% if messages %}
-				{% for msg in  messages %}
-					<div class="messages-{{ msg.tags}}"> {{ msg }} </div>
+				{% for msg in messages %}
+					<span class="messages-{{ msg.tags}}"> {{ msg }} </span>
 				{% endfor %}
 			{% endif %}
 

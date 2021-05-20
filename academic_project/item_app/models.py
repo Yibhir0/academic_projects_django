@@ -22,7 +22,7 @@ from django.contrib.auth.models import User
 
 
 class Project(models.Model):
-    member = models.ForeignKey(User, on_delete=models.CASCADE)
+    member = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Member')
     avg_rating = models.DecimalField(default=0, decimal_places=1, max_digits=2, validators=[checkRating])
     likes = models.PositiveIntegerField(default=0)
     name = models.CharField(max_length=40)
