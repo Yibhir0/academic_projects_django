@@ -106,7 +106,10 @@ footer{
     vertical-align:middle;
     width: 100%;
 }
-
+.messages-success{width: 100%;text-align:center;background-color: #06d6a0;}
+.messages-error{width: 100%;text-align:center;background-color: #e63946;}
+.messages-warning{width: 100%;text-align:center;background-color: #fca311;}
+.messages-info{width: 100%;text-align:center;background-color: #a8dadc;}
 #id_description{max-width:300px; max-height:20px;}
 
 .form-container{width:40%; margin:auto;display:flex; flex-direction: column;align-items: center;}

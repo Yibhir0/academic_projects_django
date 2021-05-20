@@ -7,7 +7,11 @@
                 <a href="{% url 'project-create' %}">Add Project</a>
                 {% endif %}
                 <form action="{% url 'memberSearch-list' %}" method="GET">
-                    <input name="qry-search" type="text" placeholder="keyword">
+                    <input name="qry-search" type="text" placeholder="search owner/name">
+                     <select name="options">
+                         <option value="keyword">keyword</option>
+                         <option value="name">Name</option>
+                     </select>
                 </form>
           </div>
 

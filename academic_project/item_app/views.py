@@ -42,8 +42,8 @@ class ProjectDetailView(DetailView):
 
 
 # Yassine Ibhir
-# Class based View  searches and renders projects containing
-# texts (keyword)  enters by user.
+# Class based View  searches based on the filter and
+# the texts the user enters.
 
 class searchProjectKeyWord(ListView):
     model = Project
@@ -53,8 +53,18 @@ class searchProjectKeyWord(ListView):
     def get_queryset(self):
 
         keyword_text = self.request.GET.get('qry-search')
+        option_text = self.request.GET.get('options')
+        projects = None
+        if len(keyword_text) == 0:
+            messages.error(self.request, 'Provide a text to search for')
+            return projects
+        if option_text == 'keyword':
+            projects = Project.objects.filter(keyword_list__icontains=keyword_text)
+        elif option_text == 'name':
+            projects = Project.objects.filter(name__icontains=keyword_text)
+        else :
+            projects = Project.objects.filter(member__username__icontains=keyword_text)
 
-        projects = Project.objects.filter(keyword_list__icontains=keyword_text)
         if len(projects) > 0:
             messages.success(self.request, 'Found {0}, matching'.format(len(projects)))
             return projects
@@ -74,14 +84,21 @@ class searchMemberProjectKeyWord(ListView):
     def get_queryset(self):
 
         keyword_text = self.request.GET.get('qry-search')
-
-        projects = Project.objects.filter(keyword_list__icontains=keyword_text)
-        if len(projects) > 0:
-            messages.success(self.request, 'Found {0}, matching'.format(len(projects)))
+        option_text = self.request.GET.get('options')
+        projects  = None
+        if len(keyword_text) == 0 :
+            messages.error(self.request, 'Provide a text to search for')
             return projects
+        if option_text == 'keyword':
+            projects = Project.objects.filter(keyword_list__icontains=keyword_text)
+        else:
+            projects = Project.objects.filter(name__icontains=keyword_text)
+
+        if len(projects) > 0:
+            messages.success(self.request, 'Found {0}, matches'.format(len(projects)))
         else:
             messages.warning(self.request, 'Search did not match any text {0}'.format(keyword_text))
-            return projects
+        return projects
 
 
 # Yassine Ibhir
