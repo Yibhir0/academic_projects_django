@@ -1,5 +1,4 @@
 from urllib import request
-
 from django.contrib import messages
 from django.shortcuts import render
 from .models import Project
@@ -10,7 +9,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Yassine Ibhir
 # render the home page
-
 def home(request):
     return render(request, 'item_app/index.html')
 
@@ -19,7 +17,7 @@ def home(request):
 # Class based view that handles the Project list using pagination.
 # Note that we don't need to override the get_queryset since
 # ListView returns all the objects in the model but we are doing it
-# for readability
+# to sort by date in desc order.
 
 class ProjectListView(ListView):
     model = Project
@@ -28,7 +26,7 @@ class ProjectListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        return Project.objects.all()
+        return Project.objects.all().order_by('-post_date')
 
 
 # Yassine Ibhir
@@ -52,18 +50,19 @@ class searchProjectKeyWord(ListView):
 
     def get_queryset(self):
 
-        keyword_text = self.request.GET.get('qry-search')
-        option_text = self.request.GET.get('options')
-        projects = None
+        keyword_text = self.request.GET.get('qry-search', '')
+        option_text = self.request.GET.get('options', 'keyword')
+        projects = Project.objects.all()
         if len(keyword_text) == 0:
             messages.error(self.request, 'Provide a text to search for')
             return projects
         if option_text == 'keyword':
-            projects = Project.objects.filter(keyword_list__icontains=keyword_text)
+            projects = projects.filter(keyword_list__icontains=keyword_text).order_by('-post_date')
         elif option_text == 'name':
-            projects = Project.objects.filter(name__icontains=keyword_text)
-        else :
-            projects = Project.objects.filter(member__username__icontains=keyword_text)
+            projects = projects.filter(name__icontains=keyword_text).order_by('-post_date')
+        # owner's name
+        else:
+            projects = projects.filter(member__username__icontains=keyword_text).order_by('-post_date')
 
         if len(projects) > 0:
             messages.success(self.request, 'Found {0}, matching'.format(len(projects)))
@@ -85,14 +84,16 @@ class searchMemberProjectKeyWord(ListView):
 
         keyword_text = self.request.GET.get('qry-search')
         option_text = self.request.GET.get('options')
-        projects  = None
-        if len(keyword_text) == 0 :
+        login_member = self.request.user
+        projects = Project.objects.filter(member=login_member).order_by('-post_date')
+
+        if len(keyword_text) == 0:
             messages.error(self.request, 'Provide a text to search for')
             return projects
         if option_text == 'keyword':
-            projects = Project.objects.filter(keyword_list__icontains=keyword_text)
+            projects = projects.filter(keyword_list__icontains=keyword_text).order_by('-post_date')
         else:
-            projects = Project.objects.filter(name__icontains=keyword_text)
+            projects = projects.filter(name__icontains=keyword_text).order_by('-post_date')
 
         if len(projects) > 0:
             messages.success(self.request, 'Found {0}, matches'.format(len(projects)))
@@ -113,7 +114,7 @@ class ProjectMemberListView(ListView):
 
     def get_queryset(self):
         login_member = self.request.user
-        member_projects = Project.objects.filter(member=login_member)
+        member_projects = Project.objects.filter(member=login_member).order_by('-post_date')
         return member_projects
 
 

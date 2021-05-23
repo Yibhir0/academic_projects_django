@@ -1,3 +1,5 @@
+<!--Yassine Ibhir-->
+<!--This is a log in template-->
 {% extends "super.html" %}
 
 	{% block content %}
@@ -15,7 +17,8 @@
                 </span>
 
             </form>
-            <span>Don't have an account <a href="{% url 'user-register' %}">Sign Up</a></span>
+            <span class="center-txt">Don't have an account? <a href="{% url 'user-register' %}">Sign Up</a></span>
+            <span class="center-txt"> <a href="{% url 'password_reset' %}">Forgot your password?</a></span>
 
         </section>
 
