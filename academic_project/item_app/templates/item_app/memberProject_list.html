@@ -1,13 +1,20 @@
+<!--Yassine Ibhir-->
+<!--member's project list-->
 {% extends "super.html" %}
 
 	{% block content %}
           <div class="projects-heading">
-                <h2> {{user}} {{ page_obj.paginator.count }} Projects</h2>
+
                 {% if user.is_authenticated %}
-                <a href="{% url 'project-create' %}">Add Project</a>
+                <a title="add new project" class="add-link" href="{% url 'project-create' %}" >Add Project</a>
                 {% endif %}
+                 <div class="vertical-container">
+                    <img id="profile-img" src="{{user.member.profile_picture.url}}">
+                    <h3> {{user.first_name}} {{user.last_name}} </h3>
+                    <p>{{ page_obj.paginator.count }} Projects</p>
+                </div>
                 <form action="{% url 'memberSearch-list' %}" method="GET">
-                    <input name="qry-search" type="text" placeholder="search owner/name">
+                    <input name="qry-search" type="text" placeholder="filter by ->">
                      <select name="options">
                          <option value="keyword">keyword</option>
                          <option value="name">Name</option>
@@ -20,15 +27,22 @@
             <div class="vertical-container">
             {% for project in project_list %}
                 <div class="horizontal-container">
-                    <div class="align-vertical"><img src="{{project.snapshot.url}}"> </div>
+                    <div class="align-vertical">
+                        <span id="date-selector">{{ project.post_date|date:"M d, Y" }}</span>
+                        <span> <img src="{{project.snapshot.url}}"> </span>
+                    </div>
+
+
                     <div class="align-vertical">Name :{{project.name}}</div>
                     <div class="align-vertical">Keyword :{{project.keyword_list}}</div>
                     <div class="align-vertical">Owner :{{project.member}}</div>
-                    <div class="align-vertical"><a href="{% url 'project-detail' project.id %}">Details</a></div>
+                    <div class="align-vertical"><a class="detail-link" href="{% url 'project-detail' project.id %}">Details</a></div>
                     <div class="align-vertical">
                         <span ><a class="update-link" href="{% url 'project-update' project.id %}">Update</a></span>
                         <span><a class= "delete-link" href="{% url 'project-delete' project.id %}">Delete</a></span>
                     </div>
+
+
 
 
                 </div>

@@ -1,3 +1,5 @@
+<!--Yassine Ibhir-->
+<!-- projects list-->
 {% extends "super.html" %}
 
 	{% block content %}
@@ -7,7 +9,7 @@
                 <a class="add-link" href="{% url 'project-create' %}">Add Project</a>
                 {% endif %}
                 <form action="{% url 'search-list' %}" method="GET">
-                    <input name="qry-search" type="text" placeholder="keyword">
+                    <input name="qry-search" type="text" placeholder="filter By ->">
                     <select name="options">
                          <option value="keyword">keyword</option>
                          <option value="name">Name</option>
@@ -22,11 +24,12 @@
             <div class="vertical-container">
             {% for project in project_list %}
                 <div class="horizontal-container">
-                    <span class="align-vertical"><img src="{{project.snapshot.url}}"> </span>
-                    <span class="align-vertical">Name :{{project.name}}</span>
-                    <span class="align-vertical">Keyword :{{project.keyword_list}}</span>
-                    <span class="align-vertical">Owner :{{project.member}}</span>
-                    <span class="align-vertical"><a href="{% url 'project-detail' project.id %}">details</a></span>
+                    <div class="align-vertical"><img src="{{project.snapshot.url}}"> </div>
+                    <div class="align-vertical">Name :{{project.name}}</div>
+                    <div class="align-vertical">Keyword :{{project.keyword_list}}</div>
+                    <div class="align-vertical">Owner :{{project.member}}</div>
+                    <div class="align-vertical" ><a class="detail-link" href="{% url 'project-detail' project.id %}">details</a></div>
+                    <div class="align-vertical" id="date-selector">{{project.post_date}}</div>
                 </div>
             {% endfor %}
             </div>
@@ -51,6 +54,5 @@
         {% else %}
             <p>No projects are available.</p>
         {% endif %}
-
 
         {% endblock %}

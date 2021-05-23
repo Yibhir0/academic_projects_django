@@ -24,7 +24,7 @@
 					<li><a class="main_urls"  href="#" title="Users">Users</a></li>
 					<li><a class="main_urls"  href="{% url 'project-list' %}" title="Projects"> Projects</a></li>
 					{% if user.is_authenticated %}
-						<li><a class="main_urls"  href="{% url 'memberProject-list' %}" title="memberProjects">My Projects</a></li>
+
 						<li><a class="main_urls"  href="#" title="Messages">Messages</a></li>
 					{% endif %}
 				</ul>
@@ -32,7 +32,7 @@
 			<nav>
 				{% if user.is_authenticated %}
 					<span class="greet_user" >Hello {{user}} </span>
-					<span><a class="main_urls"  href="#" title="Profile">Profile</a></span>
+					<span><a class="main_urls"  href="{% url 'user-profile' %}" title="Profile">Profile</a></span>
 					<span><a  class="main_urls" href="{% url 'user-logout' %}" title="logout">Logout</a></span>
 				{% else %}
 					<span class="greet_user">Hello Guest</span>

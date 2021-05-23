@@ -1,6 +1,6 @@
 <!--Yassine Ibhir-->
-<!--This template will handle all the forms
-of creating and updating a project-->
+<!--This template allows the user
+to update his profile and upload a picture-->
 {% extends "super.html" %}
 
 	{% block content %}
@@ -9,13 +9,14 @@ of creating and updating a project-->
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token%}
                 <fieldset class="form-content">
-                    <legend>{{legend}}</legend>
-                    {{form}}
+                    <legend>Update Profile</legend>
+                    {{update_form}}
+                    {{file_form}}
+
                 </fieldset>
                 <span class="btn-post">
-                    <button  type="submit"> {{btn}} </button>
+                    <button  type="submit">Save</button>
                 </span>
-
             </form>
 
         </section>
