@@ -1,15 +1,19 @@
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import (
+    LoginView, LogoutView,
+    PasswordResetDoneView, PasswordResetCompleteView)
+
 from django.shortcuts import render
-from .forms import UserRegistrationForm, MemberFileForm
+from .forms import UserRegistrationForm, MemberFileForm, MemberUpdateForm
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from .models import Member
+from django.contrib.auth.decorators import login_required
 
 
 # Yassine Ibhir
-# validate and register user
+# validates and registers user
 def register(request):
     if request.method == 'POST':
         register_form = UserRegistrationForm(request.POST)
@@ -26,7 +30,7 @@ def register(request):
                 customer_profile = Member.objects.create(user=new_customer)
 
             customer_profile.save()
-            messages.success(request, 'Gongratulations {0}, You are registered'.format(username))
+            messages.success(request, 'Congratulations {0}, You are registered'.format(username))
             return redirect('user-login')
         else:
             messages.error(request, "Unsuccessful registration. Invalid information.")
@@ -48,12 +52,71 @@ class UserLoginView(SuccessMessageMixin, LoginView):
 
 
 # Yassine Ibhir
-# Inherits from LogoutView and overides dispatch to add a message when user is logged out
-# to logout a user and provide a message
+# Inherits from LogoutView and overrides dispatch to add a message
+# when user is logged out
 class UserLogoutView(LogoutView):
-    template_name = 'user_app/logout.html'
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
         messages.info(request, 'You are logged out, GoodBye.')
         return response
+
+
+# Yassine Ibhir
+# using PasswordResetDone View we will create our own class
+# to override dispatch method to add a message.
+
+class UserPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'user_app/password_reset_done.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        messages.info(request, 'Check your email and follow the instructions to reset your password.')
+        return response
+
+
+# Yassine Ibhir
+# using PasswordResetCompleteView we will create our own class
+# that displays a message to the user.
+class UserPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'user_app/password_reset_complete.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        messages.info(request, 'You have successfully reset you password')
+        return response
+
+
+# Yassine Ibhir
+#  member's profile view
+@login_required(login_url='/user_app/user_login/')
+def viewProfile(request):
+    template_name = 'user_app/profile.html'
+    context = {'user': request.user}
+    return render(request, template_name, context)
+
+
+# Yassine Ibhir
+# Update member profile
+@login_required(login_url='/user_app/user_login/')
+def updateProfile(request):
+    if request.method == 'POST':
+        update_form = MemberUpdateForm(request.POST, instance=request.user)
+        file_form = MemberFileForm(request.POST, request.FILES, instance=request.user.member)
+
+        if update_form.is_valid():
+            update_form.save()
+            if file_form.is_valid():
+                file_form.save()
+            messages.success(request, 'You successfully updated your profile')
+            return redirect('user-profile')
+        else:
+            messages.error(request, "Invalid information.Try again")
+
+    else:
+        update_form = MemberUpdateForm(instance=request.user)
+        file_form = MemberFileForm(instance=request.user.member)
+
+    template_name = 'user_app/update_profile.html'
+    context = {'update_form': update_form, 'file_form': file_form}
+    return render(request, template_name, context)

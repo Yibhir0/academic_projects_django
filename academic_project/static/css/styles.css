@@ -8,7 +8,7 @@ body {
   flex-direction: column;
   font-family: 'Titillium Web', sans-serif;
   font-weight : bold;
-  min-width:1000px;
+  min-width:1250px;
 }
 .content {
   flex: 1 0 auto;
@@ -25,18 +25,6 @@ footer {
     font-weight : bold;
 }
 
-/**html, body {
-  height: 100%;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-   font-family: 'Titillium Web', sans-serif;
-   min-width:1000px;
-
-}
-**/
 header{
     background-color:#131921;
     display: flex;
@@ -54,6 +42,9 @@ li,span{
     margin: 2px;
 }
 
+a{
+    cursor: pointer;
+}
 
 .main_urls{
  text-decoration: none;
@@ -62,28 +53,20 @@ li,span{
  color:White;
 
 }
-a:hover{
-    color:#ff4000;
-}
 
 div a {
     text-decoration: none;
 }
 
+.delete-link{background-color:#ff453c; color:white;padding :0px 4px;border-radius:2em;}
+.add-link{background-color:#363b74;border-radius:2em;color:white;padding:0px 4px;}
+.detail-link{background-color:#d15f37; color:white;padding:0px 4px;border-radius:2em;}
+.update-link{background-color:#0080ff; color:white;padding:0px 4px;border-radius:2em;}
+.view-link {background-color: #363b74;color:white; padding:0px 4px;border-radius:2em;}
+.msg-link,#date-selector {color:lightgrey;}
 img {
-width: 20px;
+width: 30px;
 }
-/**
-footer{
-    </main>
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    position: fixed;
-    bottom:0;
-    color: white;
-}**/
 
 .horizontal-container{
     display: flex;
@@ -100,6 +83,8 @@ footer{
     justify-content: space-between;
     align-items: center;
 }
+
+
 .align-vertical{
     padding:0;
     margin: 0;
@@ -112,6 +97,8 @@ footer{
 .messages-info{width: 100%;text-align:center;background-color: #a8dadc;}
 #id_description{max-width:300px; max-height:20px;}
 
+/** forms*//
+.center-txt{margin:auto;}
 .form-container{width:40%; margin:auto;display:flex; flex-direction: column;align-items: center;}
 .form-content{display:flex; flex-direction: column; align-items: center; justify-content: space-evenly; }
 .helptext ul {display:flex; flex-direction: column;}
@@ -121,3 +108,9 @@ footer{
  nav .greet_user { color:white;}
 .pages-content {margin:auto;display:flex;align-items: center;}
 .projects-heading{display: flex;align-items: center;justify-content: space-between;}
+
+/** user profile**/
+.user-profile {border: 1px solid #ff4000;display:flex;
+                align-items: center; justify-content: space-evenly;margin:auto;
+                width: 40%;padding: 10px;}
+#profile-img{ width:60px;  border-radius: 50%;}

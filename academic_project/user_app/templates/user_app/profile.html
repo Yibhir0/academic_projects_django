@@ -1,0 +1,20 @@
+<!--Yassine Ibhir-->
+<!--This template is the user profile
+page-->
+{% extends "super.html" %}
+{% load static %}
+	{% block content %}
+      <div class="user-profile">
+        <div class="vertical-container">
+            <img id="profile-img" src="{{ user.member.profile_picture.url }}" alt="avatar">
+            <span>{{ user.first_name }} {{ user.last_name }}</span>
+            <span>{{ user.email }}</span>
+            <a class="update-link" href="{% url 'user-update' %}">Update Profile</a>
+        </div>
+          <a class="msg-link"  href="#"><img src="{% static 'images/Messages-Icon.png' %}">msgs</a>
+          <a class="view-link"  href="{% url 'memberProject-list' %}" >My Projects</a>
+
+      </div>
+
+
+    {% endblock %}

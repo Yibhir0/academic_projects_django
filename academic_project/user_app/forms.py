@@ -1,4 +1,4 @@
-# Yassine Ibhir
+
 
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
@@ -8,6 +8,7 @@ from .models import Member
 
 # Yassine Ibhir
 # This class creates a form for user registration
+
 class UserRegistrationForm(UserCreationForm):
     email = forms.CharField(max_length=100, required=True)
     first_name = forms.CharField(max_length=100, required=False)
@@ -24,8 +25,21 @@ class UserRegistrationForm(UserCreationForm):
 
 
 # Yassine Ibhir
-# This class creates a forr for user profile picture
+# This class creates a form for user profile picture
 class MemberFileForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = ['profile_picture']
+
+
+#
+# Yassine Ibhir
+# This class creates a form to update the member info
+class MemberUpdateForm(forms.ModelForm):
+    email = forms.CharField(max_length=100, required=True)
+    first_name = forms.CharField(max_length=100, required=False)
+    last_name = forms.CharField(max_length=100, required=False)
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email']
