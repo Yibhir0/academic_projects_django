@@ -1,7 +1,7 @@
 from django.core.validators import ValidationError
 from django.db import models
 from django.utils import timezone
-
+from django.contrib.auth.models import User
 
 # This method validates that the user rating is a positive decimal number and it is not greater than 5 (maximum).
 # @author David Pizzolongo
@@ -11,16 +11,10 @@ def checkRating(rating):
     if rating > 5:
         raise ValidationError("Rating cannot exceed 5 stars.")
 
-
-# The Project class contains projects published by one or many members.
-# Its entities include the project name, type, keyword_list and status, as well as
+# The Project model contains projects published by a member.
+# Its entities include the member's name, project name, type, keyword_list and status, as well as
 # other optional fields.
 # @author Yassine Ibhir/David Pizzolongo
-from django.db import models
-from django.utils import timezone
-from django.contrib.auth.models import User
-
-
 class Project(models.Model):
     member = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Member')
     avg_rating = models.DecimalField(default=0, decimal_places=1, max_digits=2, validators=[checkRating])
@@ -35,4 +29,5 @@ class Project(models.Model):
     snapshot = models.ImageField(upload_to='project_images', default='project_default_pic.png')
 
     def __str__(self):
+        # returns the project's name as its identifier
         return self.name

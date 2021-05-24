@@ -1,27 +1,24 @@
 {% extends "super.html" %}
 
-{% load static %}
+    {% block heading %}
+        <meta name="description"  content="Project View">
+        <meta name="author" content="Guang Zhang and David Pizzolongo">
+    {% endblock heading %}
+
 	{% block content %}
     <h2>420-DW Web Development III - Python Server-side programming   Winter 2021</h2>
-    <h3>Project 2 - A fully fledged Django Project Website</h3>
-    <div class="home-page">
-        <div class="home-description">
-            <span> Teacher: Nasreddine Hallam </span>
-            <br>
+    <h3 id="projTitle">Project 2 - A fully fledged Django Project Website</h3>
+
+    <div id="home-page">
+
+        <div id="home-description">
             <span> Git repo: <a href="https://gitlab.com/Yassine.Ibhir/dw-42021-prj-grp8-pizzolongo.git">https://gitlab.com/Yassine.Ibhir/dw-42021-prj-grp8-pizzolongo.git</a></span>
             <br>
-            <span> Leader:      David Pizzolongo       ID: 1936390 </span>
-            <br>
-            <span> Member 2: Guang Zhang             ID: 1942372 </span>
-            <br>
-            <span> Member 3: Yassine Ibhir               ID: 1612502 </span>
-            <br>
-            <span> Member 4: Aharon Moryoussef    ID: 1732787 </span>
-            <br>
-            <p> This project will apply Python, Django, and Postgres knowledge and skills to develop a fully featured web project </p>
+            <p> This project will apply Python, Django, and Postgres knowledge and skills to develop a fully featured web project. </p>
             <p> The project consists of 4 cooperating Django apps that provides potential and registered users with a web platform to manage
-            projects, communicate among themselves, rate and comment on the projects</p>
+            projects, communicate among themselves, rate and comment on the projects.</p>
 
+            <button id="viewProjBtn"><a href="{% url 'project-list' %}" title="projects" id="viewLink">View Projects</a></button>
         </div>
 
     </div>
