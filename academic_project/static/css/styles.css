@@ -239,3 +239,39 @@ h2{
 #projectURL{
     margin-top: 40px;
 }
+
+/** home page styles **/
+#projTitle, #home-page {
+    padding-left: 5px;
+}
+
+#home-description{
+    margin-top: 10px;
+}
+
+#viewProjBtn{
+    background: #0000ee;
+    border-radius: 5px;
+    height: 30px;
+    width: 100px;
+    margin-left: 5%;
+    margin-top: 1%;
+}
+
+#viewLink{
+    color: white;
+}
+
+#viewLink:hover{
+    color: #c00000;
+}
+
+/** about page styles **/
+#contact-header{
+    text-decoration: underline;
+}
+
+#num-authors-para{
+    margin-top: 5em;
+    font-weight: normal;
+}
