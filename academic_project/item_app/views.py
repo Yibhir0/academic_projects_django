@@ -3,15 +3,35 @@ from django.contrib import messages
 from django.shortcuts import render
 from .models import Project
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
 
 # Yassine Ibhir
 # render the home page
 def home(request):
     return render(request, 'item_app/index.html')
 
+# @author David Pizzolongo
+class AboutPageView(TemplateView):
+    template_name = 'item_app/about.html'
+
+    #
+    def get_context_data(self, **kwargs):
+        about_tab_context = super().get_context_data(**kwargs)
+        list_authors = self.__getAuthors()
+        about_tab_context = {'tab_title': 'About'}
+
+        about_tab_context['list_authors'] = list_authors
+        about_tab_context['num_authors'] = len(list_authors)
+        return about_tab_context
+
+    def __getAuthors(self):
+        list_authors = []
+        list_authors.append("David Pizzolongo 1936390 dPizzolongo@gmail.com")
+        list_authors.append("Guang Zhang 1942372 gZhang@gmail.com")
+        list_authors.append("Yassine Ibhir 1612502 yIbhir@gmail.com")
+        list_authors.append("Aharon Moryoussef 1732787 aMoryoussef@gmail.com")
+        return list_authors
 
 # Yassine Ibhir
 # Class based view that handles the Project list using pagination.
