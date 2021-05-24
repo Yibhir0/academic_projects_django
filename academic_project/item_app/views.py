@@ -12,6 +12,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 def home(request):
     return render(request, 'item_app/index.html')
 
+# render the about page
+def about(request):
+    return render(request, 'item_app/about.html')
+
 
 # Yassine Ibhir
 # Class based view that handles the Project list using pagination.

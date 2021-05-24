@@ -20,7 +20,7 @@
 				<ul>
 
 					<li><a class="main_urls" href="{% url 'home' %}" title="services">Home</a></li>
-					<li><a class="main_urls"  href="#" title="About">About</a></li>
+					<li><a class="main_urls"  href="{% url 'about' %}" title="About">About</a></li>
 					<li><a class="main_urls"  href="#" title="Users">Users</a></li>
 					<li><a class="main_urls"  href="{% url 'project-list' %}" title="Projects"> Projects</a></li>
 					{% if user.is_authenticated %}
