@@ -1,0 +1,19 @@
+<!--Yassine Ibhir-->
+<!-- users list-->
+{% extends "super.html" %}
+
+	{% block content %}
+      <section class="all-users">
+          <h3>Messages/Contacts</h3>
+        {% for u in users_list %}
+          <a href="{% url 'message-room' u.id %}" class="user-notification">
+             <span>
+                 <img id="profile-img" src="{{ u.member.profile_picture.url }}"><sup class="notification">{{u.un_read}}</sup>
+             </span>
+             <span>{{u.first_name}} {{u.last_name}}</span>
+
+          </a>
+        {% endfor %}
+      </section>
+
+   {% endblock %}

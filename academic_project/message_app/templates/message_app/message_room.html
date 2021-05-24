@@ -1,0 +1,28 @@
+<!--Yassine Ibhir-->
+<!--This is the template where users will chat privately-->
+{% extends "super.html" %}
+
+	{% block content %}
+
+    <section class="vertical-container">
+        <div class="msg-header">
+          <img id="profile-img" src="{{ alternate_user.member.profile_picture.url }}">
+          <span>{{alternate_user.first_name}} {{alternate_user.last_name}}</span>
+        </div>
+         <form  method="post">
+                {% csrf_token%}
+                    {{message_form}}
+                <span class="btn-border">
+                    <button  type="submit" id="send-msg" name="send-msg">send</button>
+                </span>
+         </form>
+          {% for m in msgs %}
+        <div class="msg-info">
+            <img id="msg-img" src="{{ m.sender.member.profile_picture.url }}">
+            <span id="date-selector">{{m.msg_date}}</span>
+        </div>
+        <span class="msg-content-{% if m.sender == request.user %}sender{% else %}receiver{% endif %}">{{m.message}}</span>
+          {% endfor %}
+        </section>
+
+    {% endblock %}
