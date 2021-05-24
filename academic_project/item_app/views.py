@@ -6,11 +6,12 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-# Yassine Ibhir
-# render the home page
+# The following method renders the home page with index.html.
+# @author Yassine Ibhir
 def home(request):
     return render(request, 'item_app/index.html')
 
+# The AboutPage
 # @author David Pizzolongo
 class AboutPageView(TemplateView):
     template_name = 'item_app/about.html'
@@ -33,12 +34,12 @@ class AboutPageView(TemplateView):
         list_authors.append("Aharon Moryoussef 1732787 aMoryoussef@gmail.com")
         return list_authors
 
-# Yassine Ibhir
+
 # Class based view that handles the Project list using pagination.
 # Note that we don't need to override the get_queryset since
 # ListView returns all the objects in the model but we are doing it
 # to sort by date in desc order.
-
+# @author Yassine Ibhir
 class ProjectListView(ListView):
     model = Project
     template_name = 'item_app/project_list.html'
@@ -49,20 +50,18 @@ class ProjectListView(ListView):
         return Project.objects.all().order_by('-post_date')
 
 
-# Yassine Ibhir
 # Class based view that handles the view of one project.
 # all we need to do is pass the primary key with the url when user
 # clicks the project and the rest is handled by Django DetailView class.
-
+# @author Yassine Ibhir
 class ProjectDetailView(DetailView):
     model = Project
     template_name = 'item_app/project_detail.html'
 
 
-# Yassine Ibhir
 # Class based View  searches based on the filter and
 # the texts the user enters.
-
+# @author Yassine Ibhir
 class searchProjectKeyWord(ListView):
     model = Project
     template_name = 'item_app/project_list.html'
@@ -92,9 +91,8 @@ class searchProjectKeyWord(ListView):
             return projects
 
 
-# Yassine Ibhir
 # Class based View  searches and renders projects of the logged in user
-
+# @author Yassine Ibhir
 class searchMemberProjectKeyWord(ListView):
     model = Project
     template_name = 'item_app/memberProject_list.html'
@@ -122,10 +120,9 @@ class searchMemberProjectKeyWord(ListView):
         return projects
 
 
-# Yassine Ibhir
 # Class based view that handles the authenticated-user's
 # Project list using pagination.
-
+# @author Yassine Ibhir
 class ProjectMemberListView(ListView):
     model = Project
     template_name = 'item_app/memberProject_list.html'
@@ -138,11 +135,10 @@ class ProjectMemberListView(ListView):
         return member_projects
 
 
-# Yassine Ibhir
-
 # saves and provides form for adding Project (CreateView)
 # it requires login and redirects to project-list or
 # login pages based on user authentication(LoginRequiredMixin).
+# @author Yassine Ibhir
 class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
     # create form with these fields
@@ -172,12 +168,11 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-# Yassine Ibhir
 # saves and provides form for updating Project
 # it requires login and also verifies that the user
 # is the one who created the post before updating. This is all done by
 # the base classes that we inherit from.
-
+# @author Yassine Ibhir
 class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Project
     # create form with these fields
@@ -212,11 +207,10 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return context
 
 
-# Yassine Ibhir
 # deletes project
 # it requires login and also verifies that the user
 # is the one who created the post before deleting.
-
+# @author Yassine Ibhir
 class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Project
 
@@ -230,16 +224,3 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         project = self.get_object()
         return self.request.user == project.member
-
-# def projects_list(request):
-#     all_projects = Project.objects.all()
-#     context = {'projects_list': all_projects}
-#     return render(request, 'item_app/all_projects.html', context)
-#
-#
-# def project_detail(request, id):
-#     try:
-#         project = Project.objects.get(pk=id)
-#     except Project.DoesNotExist:
-#         raise Http404("Project does not exist")
-#     return render(request, 'item_app/project_detail.html', {'project': project})

@@ -4,18 +4,17 @@ from item_app.models import Project
 from django.contrib.auth.models import User
 
 
-# Create your models here.
 # The Comment class defines the attributes corresponding to the project. This includes
 # the comment itself and the date.
 # @author Yassine Ibhir/David Pizzolongo
-
 class Comment(models.Model):
     comment = models.CharField(max_length=200)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     member = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
 
-
+#
+# @author Yassine Ibhir/David Pizzolongo
 class Message(models.Model):
     sender = models.ForeignKey(User, related_name="msg_sender", on_delete=models.CASCADE)
     receiver = models.ForeignKey(User, related_name="msg_receiver", on_delete=models.CASCADE)

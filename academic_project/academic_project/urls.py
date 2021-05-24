@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+# These are the main urls of the webpage. An empty path corresponds to item app's
+# urls which
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('item_app.urls')),
