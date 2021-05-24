@@ -9,6 +9,7 @@
 	<link 	rel ="stylesheet"
 		  	type="text/css"
 		  	href="{% static 'css/styles.css' %}">
+	<script defer src="{% static 'javascript/main.js' %}"></script>
 
 	  <title>Academic Project</title>
 
@@ -24,8 +25,7 @@
 					<li><a class="main_urls"  href="#" title="Users">Users</a></li>
 					<li><a class="main_urls"  href="{% url 'project-list' %}" title="Projects"> Projects</a></li>
 					{% if user.is_authenticated %}
-
-						<li><a class="main_urls"  href="#" title="Messages">Messages</a></li>
+						<li><a class="main_urls"  href="{% url 'user-msgs' %}" title="Messages">Messages<sup class="msgs" ></sup></a></li>
 					{% endif %}
 				</ul>
 			</nav>

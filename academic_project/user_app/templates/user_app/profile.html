@@ -11,7 +11,7 @@ page-->
             <span>{{ user.email }}</span>
             <a class="update-link" href="{% url 'user-update' %}">Update Profile</a>
         </div>
-          <a class="msg-link"  href="#"><img src="{% static 'images/Messages-Icon.png' %}">msgs</a>
+          <a class="msg-link"  href="{% url 'user-msgs' %}"><img src="{% static 'images/Messages-Icon.png' %}"><sup class="msgs" ></sup>msgs</a>
           <a class="view-link"  href="{% url 'memberProject-list' %}" >My Projects</a>
 
       </div>
