@@ -13,7 +13,9 @@ class Comment(models.Model):
     member = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
 
-#
+# The Message class contains entities representing the user who sent the message,
+# the user who received the message, the message description, the status of the message,
+# as well as the date and time of the message.
 # @author Yassine Ibhir/David Pizzolongo
 class Message(models.Model):
     sender = models.ForeignKey(User, related_name="msg_sender", on_delete=models.CASCADE)
@@ -22,5 +24,6 @@ class Message(models.Model):
     is_read = models.BooleanField(default=False)
     msg_date = models.DateTimeField(auto_now_add=True)
 
+    # orders by msg_date in decreasing order (most recent to oldest).
     class Meta:
         ordering = ['-msg_date']

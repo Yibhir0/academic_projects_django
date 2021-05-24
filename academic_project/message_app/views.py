@@ -10,9 +10,9 @@ from .forms import MessageForm
 from django.contrib import messages as django_messages
 
 
-# Yassine Ibhir
 # Lists all users and add an attribute as number of
 # unread messages sent to the current user. This will be used a notice.
+# @author Yassine Ibhir
 class UserMessageListView(LoginRequiredMixin, ListView):
     Model = User
     template_name = 'message_app/user_list_message.html'
@@ -27,10 +27,10 @@ class UserMessageListView(LoginRequiredMixin, ListView):
         return users_with_msgs_num
 
 
-# Yassine Ibhir
 # This methods access the Message model
 # to get the numbers of unread messages
 # and then appends it to the list and returns it
+# @author Yassine Ibhir
 def appendNumberOfMsgs(users, login_user):
     users_with_num_messages = []
     for u in users:

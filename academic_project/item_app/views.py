@@ -6,17 +6,21 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-# The following method renders the home page with index.html.
+# The following method renders the home page with index.html from item_app.
 # @author Yassine Ibhir
 def home(request):
     return render(request, 'item_app/index.html')
 
-# The AboutPage
+# The AboutPageView class inherits from TemplateView. It passes template about
+# and a dictionary of context data to the view. Using methods get_context_data() and
+# __getAuthors(), a list of authors is computed and added to the dictionary object.
 # @author David Pizzolongo
 class AboutPageView(TemplateView):
     template_name = 'item_app/about.html'
 
-    #
+    # This method builds the context of the view with a tab title, a list of
+    # authors from the __getAuthors() method and the number of authors in this list.
+    # All of this information will be displayed in the about view.
     def get_context_data(self, **kwargs):
         about_tab_context = super().get_context_data(**kwargs)
         list_authors = self.__getAuthors()
@@ -26,6 +30,8 @@ class AboutPageView(TemplateView):
         about_tab_context['num_authors'] = len(list_authors)
         return about_tab_context
 
+    # The __getAuthors function returns a list of all members that were part of this project
+    # along with their information (student id and fictitious email).
     def __getAuthors(self):
         list_authors = []
         list_authors.append("David Pizzolongo 1936390 dPizzolongo@gmail.com")
