@@ -1,0 +1,47 @@
+# List of Projects to test out. Projects are created on the Admin site, so there were no fields for avg_rating and likes field.
+
+projects_lst='[{"model": "item_app.project", "pk": 1, "fields": {"member": 2, "avg_rating": "0.0", "likes": 0, "name": "coronavirus research", "project_type": "academic", "keyword_list": "covid", "description":
+"research", "url": "https://www.nature.com/articles/d41586-020-00502-w", "status": "in progress", "post_date": "2021-05-18T00:20:11.221Z", "snapshot": "project_default_pic.png"}}, {"model": "item_app.project
+", "pk": 2, "fields": {"member": 1, "avg_rating": "0.0", "likes": 0, "name": "Coronavirus Mapping", "project_type": "research", "keyword_list": "coronavirus, mapping, medicine", "description": "Coronavirus t
+racking and mapping worldwide, by Johns Hopkins", "url": "https://coronavirus.jhu.edu/map.html", "status": "In progress", "post_date": "2021-05-18T01:28:39.593Z", "snapshot": "project_images/CoronavirusMapJo
+hnsHopkins_vhZK96Y.jpg"}}, {"model": "item_app.project", "pk": 3, "fields": {"member": 1, "avg_rating": "0.0", "likes": 0, "name": "COVID Alert", "project_type": "government", "keyword_list": "COVID, trackin
+g, Canada", "description": "Coronavirus tracking app by Government of Canada", "url": "https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html", "status": "Comp
+leted", "post_date": "2021-05-18T01:35:15.700Z", "snapshot": "project_images/COVIDalert_XalbMB1.png"}}, {"model": "item_app.project", "pk": 4, "fields": {"member": 1, "avg_rating": "0.0", "likes": 0, "name":
+ "AI for COVID-19 Drug Discovery Vaccine", "project_type": "academic", "keyword_list": "AI, COVID-19, Drug, Vaccine", "description": "Artificial Intelligence for COVID-19 Drug discovery, vaccine", "url": "ht
+tps://www.frontiersin.org/articles/10.3389/frai.2020.00065/full", "status": "Completed", "post_date": "2021-05-18T01:38:37.607Z", "snapshot": "project_images/AIforCOVIDdrugvaccine_3IHTw39.gif"}}, {"model": "
+item_app.project", "pk": 5, "fields": {"member": 1, "avg_rating": "0.0", "likes": 0, "name": "Face Recognition", "project_type": "research", "keyword_list": "Real-Time, Face Recognition", "description": "Rea
+l-time face recognition, end-to-end project.", "url": "https://towardsdatascience.com/real-time-face-recognition-an-end-to-end-project-b738bb0f7348", "status": "Completed", "post_date": "2021-05-18T04:07:53.
+995Z", "snapshot": "project_images/FaceRecognition_tW0ljkw.png"}}, {"model": "item_app.project", "pk": 6, "fields": {"member": 1, "avg_rating": "0.0", "likes": 0, "name": "Online Auction", "project_type": "i
+ndustry", "keyword_list": "bidding, online, auction", "description": "Online Auction System, bring events online during COVID", "url": "https://www.biddingowl.com/", "status": "Completed", "post_date": "2021
+-05-18T04:10:42.534Z", "snapshot": "project_images/BiddingOwl_mUYzVur.png"}}, {"model": "item_app.project", "pk": 7, "fields": {"member": 1, "avg_rating": "0.0", "likes": 0, "name": "Design eBooks", "project
+_type": "industry", "keyword_list": "eBooks, Design, Online", "description": "Design professional-quality ebooks online for free", "url": "https://www.canva.com/create/ebooks/", "status": "Completed", "post_
+date": "2021-05-18T04:17:42.586Z", "snapshot": "project_images/CanvasEbook_Bti0qq1.jpg"}}, {"model": "item_app.project", "pk": 10, "fields": {"member": 1, "avg_rating": "0.0", "likes": 0, "name": "Ingress Pr
+ime", "project_type": "industry", "keyword_list": "Google, Ingress, Game", "description": "World of Ingress, Intel Map, bonding and discovering", "url": "https://www.ingress.com/", "status": "In progress", "
+post_date": "2021-05-18T04:34:55.859Z", "snapshot": "project_images/Ingress_ulR7Hj6.jpg"}}, {"model": "item_app.project", "pk": 11, "fields": {"member": 1, "avg_rating": "0.0", "likes": 0, "name": "World Won
+ders Project", "project_type": "research", "keyword_list": "world wonders, google, arts", "description": "Explore the ancient and modern wonders of the world.", "url": "https://artsandculture.google.com/", "
+status": "In progress", "post_date": "2021-05-18T04:38:54.552Z", "snapshot": "project_images/WorldWondersProject_gqRrvrE.jpg"}}, {"model": "item_app.project", "pk": 9, "fields": {"member": 1, "avg_rating": "
+0.0", "likes": 0, "name": "Mobile Wallet", "project_type": "industry", "keyword_list": "Merchant, Android, Mobile", "description": "Mobile Wallet with merchant payment using android", "url": "https://nevonpr
+ojects.com/mobile-wallet-with-merchant-payment-using-android/", "status": "Started", "post_date": "2021-05-18T04:20:32.070Z", "snapshot": "project_images/Nevonprojects_imwH2x0.jpg"}}, {"model": "item_app.pro
+ject", "pk": 8, "fields": {"member": 1, "avg_rating": "0.0", "likes": 0, "name": "Mobile Wallet", "project_type": "industry", "keyword_list": "Merchant, Android, Mobile", "description": "Mobile Wallet with m
+erchant payment using android", "url": "https://nevonprojects.com/mobile-wallet-with-merchant-payment-using-android/", "status": "Started", "post_date": "2021-05-18T04:20:32.048Z", "snapshot": "project_image
+s/Nevonprojects_imwH2x0_ZWCgMqh.jpg"}}]'
+
+
+# Messages. Between two users. Can create more users and messages for later testing.
+'[{"model": "message_app.message", "pk": 3, "fields": {"sender": 2, "receiver": 1, "message": "Thank you. Glad to get messages.", "is_read": false, "msg_date": "2021-05-24T16:39:08.023Z"}}, {"model":
+ "message_app.message", "pk": 2, "fields": {"sender": 1, "receiver": 2, "message": "Interesting projects.", "is_read": true, "msg_date": "2021-05-24T16:38:32.374Z"}}, {"model": "message_app.message", "pk": 1
+, "fields": {"sender": 1, "receiver": 2, "message": "Hello, to whom concerns.", "is_read": true, "msg_date": "2021-05-24T16:12:26.134Z"}}]'
+
+
+# Coding
+from django.core.serializers import serialize
+from item_app.models import Project
+projects_lst=Project.objects.all()
+projects = serialize("json", projects_lst)
+projects
+
+from django.core.serializers import serialize
+from message_app.models import Message
+messages_lst=Message.objects.all()
+msgs = serialize("json", messages_lst)
+msgs
