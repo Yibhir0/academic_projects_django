@@ -2,6 +2,11 @@
 <!-- projects list-->
 {% extends "super.html" %}
 
+    {% block heading %}
+        <meta name="description"  content="Project List View">
+        <meta name="author" content="Yassine Ibhir">
+    {% endblock heading %}
+
 	{% block content %}
           <div class="projects-heading">
                 <h2>{{ page_obj.paginator.count }} Projects</h2>

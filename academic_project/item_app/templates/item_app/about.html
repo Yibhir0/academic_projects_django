@@ -1,0 +1,27 @@
+{% extends "super.html" %}
+    {% block heading %}
+        <meta name="description"  content="About View">
+        <meta name="author" content="David Pizzolongo">
+    {% endblock heading %}
+
+    {% block scriptTitle %}
+        {% load static %}
+		<script defer src="{% static 'javascript/main.js' %}"></script>
+
+	  	<title>{{ tab_title }}</title>
+	{% endblock scriptTitle %}
+
+    {% block content %}
+        <div id="div-contact">
+            <h2 id="contact-header">Contact us:</h2>
+
+            {% for author in list_authors %}
+            <p>
+                {{ author }}
+                <br>
+            </p>
+            {% endfor %}
+
+            <p id="num-authors-para">Number of authors: {{ num_authors }}</p>
+        </div>
+    {% endblock content %}
