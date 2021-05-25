@@ -1,10 +1,13 @@
 from urllib import request
+
+from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 
 # ADD COMMENTS
 class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -31,6 +34,7 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         except ObjectDoesNotExist:
             return True
 
+
     # passing context to use inside the form
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -38,13 +42,14 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         context['btn'] = 'Save User'
         return context
 
+
 class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = User
 
     # template that will receive the form and display it
     template_name = 'administration_app/user_confirm_delete.html'
 
-    # go to member project-list when successfully deleted a project
+    # go to users-list when successfully deleted a project
     success_url = '/admin_app/users_list/'
 
     def test_func(self):

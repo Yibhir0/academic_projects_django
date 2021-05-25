@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from item_app.models import Project
 from django.contrib.auth.models import User
@@ -13,6 +14,10 @@ class Comment(models.Model):
     member = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
 
+    class Meta:
+        ordering = ['-date']
+
+
 # The Message class contains entities representing the user who sent the message,
 # the user who received the message, the message description, the status of the message,
 # as well as the date and time of the message.
@@ -23,6 +28,9 @@ class Message(models.Model):
     message = models.CharField(max_length=500)
     is_read = models.BooleanField(default=False)
     msg_date = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('message-room', kwargs={'pk': self.receiver.id})
 
     # orders by msg_date in decreasing order (most recent to oldest).
     class Meta:

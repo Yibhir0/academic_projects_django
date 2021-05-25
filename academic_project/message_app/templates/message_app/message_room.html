@@ -16,6 +16,7 @@
                     <button  type="submit" id="send-msg" name="send-msg">send</button>
                 </span>
          </form>
+        <div class="message-scroll-bar">
           {% for m in msgs %}
         <div class="msg-info">
             <img id="msg-img" src="{{ m.sender.member.profile_picture.url }}">
@@ -23,6 +24,7 @@
         </div>
         <span class="msg-content-{% if m.sender == request.user %}sender{% else %}receiver{% endif %}">{{m.message}}</span>
           {% endfor %}
-        </section>
+        </div>
+    </section>
 
     {% endblock %}
