@@ -12,7 +12,14 @@ def add_groups():
     for group in list_groups:
         groupObj = Group.objects.get_or_create(name = group)
         # set_permissions(groupObj, group)
-#
+
+# @ author Guang Zhang
+# Groups, Users, Permissions
+def show_groups():
+    groups_lst = Group.objects.filter(user=request.user)
+    for g in groups_lst:
+        print(g.name)
+
 # def set_permissions(groupObj, group_name):
 #     content_type = ContentType.objects.get_for_model(Project)
 #     if group_name == "members":
