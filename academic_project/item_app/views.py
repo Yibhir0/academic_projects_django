@@ -7,6 +7,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, T
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from message_app.models import Comment
 from message_app.forms import CommentForm
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 # The following method renders the home page with index.html from item_app.
@@ -167,7 +168,7 @@ class ProjectMemberListView(ListView):
 # it requires login and redirects to project-list or
 # login pages based on user authentication(LoginRequiredMixin).
 # @author Yassine Ibhir
-class ProjectCreateView(LoginRequiredMixin, CreateView):
+class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Project
     # create form with these fields
     fields = ['name', 'project_type', 'keyword_list',
@@ -183,6 +184,8 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
     # go to member project-list when successfully added a project
     success_url = reverse_lazy('memberProject-list')
+
+    success_message = 'Project is Created'
 
     def form_valid(self, form):
         form.instance.member = self.request.user
@@ -201,7 +204,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 # is the one who created the post before updating. This is all done by
 # the base classes that we inherit from.
 # @author Yassine Ibhir
-class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = Project
     # create form with these fields
     fields = ['name', 'project_type', 'keyword_list',
@@ -217,6 +220,7 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     # go to member project-list when successfully updated a project
     success_url = reverse_lazy('memberProject-list')
+    success_message = 'Project is Updated'
 
     # we override this function to check if the roject will be updated by the right user
     def form_valid(self, form):
@@ -241,7 +245,7 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 # @author Yassine Ibhir
 class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Project
-
+    success_message = 'Message is deleted'
     # template that will receive the form and display it
     template_name = 'item_app/project_confirm_delete.html'
 
