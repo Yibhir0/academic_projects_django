@@ -45,3 +45,4 @@ from message_app.models import Message
 messages_lst=Message.objects.all()
 msgs = serialize("json", messages_lst)
 msgs
+
