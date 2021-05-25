@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
 
-
 # Member model which inherits all the field from the User class
 # @author Yassine Ibhir
 class Member(models.Model):
