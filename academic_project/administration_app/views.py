@@ -34,7 +34,6 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         except ObjectDoesNotExist:
             return True
 
-
     # passing context to use inside the form
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -55,6 +54,7 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         try:
             self.request.user.groups.get(name="members")
+
             return False
 
         except ObjectDoesNotExist:
@@ -77,11 +77,20 @@ class GetAllUsersList(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     # The get_queryset() method returns the list of created users.
     def get_queryset(self):
-        # look at notes!!!
-        return User.objects.all()
+        return setGroupNameToUsers(User.objects.all())
 
     # The following method adds the tab title and the total number of tasks to the list of user tasks.
     def get_context_data(self, **kwargs):
         users_tab_context = super().get_context_data(**kwargs)
         users_tab_context['tab_title'] = 'List Users'
         return users_tab_context
+
+
+def setGroupNameToUsers(users):
+    for u in users:
+        groups = Group.objects.filter(user=u)
+        if len(groups) > 0:
+            group = groups[0].name
+            u.group = group
+
+    return users;
