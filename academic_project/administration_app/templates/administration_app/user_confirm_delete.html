@@ -1,0 +1,21 @@
+{% extends "super.html" %}
+
+    {% block content %}
+
+        <section class="form-container">
+            <form method="post" >
+                {% csrf_token%}
+                <fieldset class="form-content">
+                    <legend>Delete User</legend>
+                    <h2>Are you sure you want to delete {{object.username}}</h2>
+                </fieldset>
+                <span class="btn-post">
+                    <button  type="submit">Yes, Delete</button>
+                    <a href="{% url 'users-list' %}">No, Cancel</a>
+                </span>
+
+            </form>
+
+        </section>
+
+    {% endblock %}
