@@ -17,7 +17,7 @@ function setUp(){
 fetch number of messages from django view
 */
 function fetchNumberMessages(){
-    let url = "http://127.0.0.1:8000/message_app/messages_num/"
+    let url = "/message_app/messages_num/"
     fetch(url).then(response => {
         if(!response.ok){
             throw new Error('status code:'+ response.status);
@@ -42,4 +42,7 @@ function setNotification(obj){
     }
 
 }
+
+// Project comment/like/rate functionalities
+
 

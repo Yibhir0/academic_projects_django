@@ -1,15 +1,20 @@
 from urllib import request
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Project
-from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from message_app.models import Comment
+from message_app.forms import CommentForm
+from django.contrib.messages.views import SuccessMessageMixin
+
 
 # The following method renders the home page with index.html from item_app.
 # @author Yassine Ibhir
 def home(request):
     return render(request, 'item_app/index.html')
+
 
 # The AboutPageView class inherits from TemplateView. It passes template about
 # and a dictionary of context data to the view. Using methods get_context_data() and
@@ -56,13 +61,31 @@ class ProjectListView(ListView):
         return Project.objects.all().order_by('-post_date')
 
 
-# Class based view that handles the view of one project.
-# all we need to do is pass the primary key with the url when user
-# clicks the project and the rest is handled by Django DetailView class.
-# @author Yassine Ibhir
-class ProjectDetailView(DetailView):
-    model = Project
+# @ Yassine Ibhir
+# this function handles the details and the comments of one project.
+def project_detail(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    comments = Comment.objects.filter(project=project).order_by('-date')
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.cleaned_data.get('comment')
+            new_comment = Comment.objects.create(comment=comment, project=project, member=request.user)
+            new_comment.save()
+            messages.success(request, 'Comment is added,Thanks.')
+            return redirect(project.get_absolute_url())
+        else:
+            messages.error(request, 'Sorry, your comment was not added.')
+    else:
+        comment_form = CommentForm()
+
+    context = {'comments': comments,
+               'project': project,
+               'form': comment_form}
     template_name = 'item_app/project_detail.html'
+
+    return render(request, template_name, context)
 
 
 # Class based View  searches based on the filter and
@@ -145,7 +168,7 @@ class ProjectMemberListView(ListView):
 # it requires login and redirects to project-list or
 # login pages based on user authentication(LoginRequiredMixin).
 # @author Yassine Ibhir
-class ProjectCreateView(LoginRequiredMixin, CreateView):
+class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Project
     # create form with these fields
     fields = ['name', 'project_type', 'keyword_list',
@@ -161,6 +184,8 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
     # go to member project-list when successfully added a project
     success_url = reverse_lazy('memberProject-list')
+
+    success_message = 'Project is Created'
 
     def form_valid(self, form):
         form.instance.member = self.request.user
@@ -179,7 +204,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 # is the one who created the post before updating. This is all done by
 # the base classes that we inherit from.
 # @author Yassine Ibhir
-class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = Project
     # create form with these fields
     fields = ['name', 'project_type', 'keyword_list',
@@ -195,6 +220,7 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     # go to member project-list when successfully updated a project
     success_url = reverse_lazy('memberProject-list')
+    success_message = 'Project is Updated'
 
     # we override this function to check if the roject will be updated by the right user
     def form_valid(self, form):
@@ -219,7 +245,7 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 # @author Yassine Ibhir
 class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Project
-
+    success_message = 'Message is deleted'
     # template that will receive the form and display it
     template_name = 'item_app/project_confirm_delete.html'
 

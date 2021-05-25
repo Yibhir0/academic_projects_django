@@ -2,58 +2,93 @@
 <head>
     {% block heading %}
         <meta name="description"  content="Project Detail View">
-        <meta name="author" content="David Pizzolongo">
+        <meta name="author" content="David Pizzolongo, Yassine Ibhir">
     {% endblock heading %}
+
+
+
+        <title>Project Details</title>
 
     {% block title %}
         <title>Project Details</title>
     {% endblock title %}
 </head>
 
+
 <body>
     {% block content %}
-    <div id="mainContainer">
-      <div class="image">
-          <img id="projImg" src="{{ project.snapshot.url }}" alt="Project snapshot">
 
-          <section id="ratingContainer">
-              <p id="rating">Average Rating: {{ project.avg_rating }}</p>
+    <div class="detail-container">
+        <div id="mainContainer">
+          <div class="image">
+              <img id="projImg" src="{{ project.snapshot.url }}" alt="Project snapshot">
 
-              <div id="starsContainer"></div>
+              <section id="ratingContainer">
+                  <p id="rating">Average Rating: {{ project.avg_rating }}</p>
+
+                  <div id="starsContainer"></div>
+              </section>
+
+              <p> Go to <a href="{{ project.url }}"> Project URL. </a> </p>
+          </div>
+
+          <section id="projectDescrip">
+                <h2>{{ project.name }}</h2>
+                <p id="importantInfo">Project Owner: {{ project.member }}</p>
+
+                {% if project.description != "" %}
+                <p>Description: {{ project.description }} </p>
+
+                {% else %}
+                <p>Keywords: {{ project.keyword_list }}</p>
+                {% endif %}
+
+                <p>Date posted: {{ project.post_date }}</p>
+
+                <p id="likePara">Number of likes: {{ project.likes }}</p>
+
+                <div id="buttonsDiv">
+                    {% if user.is_authenticated %}
+                    <button aria-label="Click to like project" tabindex="0" class="buttons" id="likeBtn" type="submit">Like</button>
+                    <button aria-label="Click to submit rating" class="buttons" id="ratingBtn" type="submit">Submit Rating</button>
+                    {% endif %}
+
+                    {% if user.is_superuser %}
+
+                    <button aria-label="Click to flag project" class="buttons" id="flagBtn" type="submit">Flag</button> <!-- add view to change status -->
+                    {% endif %}
+                </div>
+
           </section>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="comment-container">
+             <section class="form-container">
+                    <form method="post">
+                        {% csrf_token%}
 
-          <p> Go to <a href="{{ project.url }}"> Project URL. </a> </p>
-      </div>
+                            {{form}}
 
-      <section id="projectDescrip">
-            <h2>{{ project.name }}</h2>
-            <p id="importantInfo">Project Owner: {{ project.member }}</p>
+                        <span class="btn-post">
+                            <button  type="submit">Comment</button>
+                        </span>
+                    </form>
 
-            {% if project.description != "" %}
-            <p>Description: {{ project.description }} </p>
+             </section>
+             <section class="comment-scroll-bar">
+                 {% for c in comments %}
+                    <div >
+                        <img id="msg-img" src="{{ c.member.member.profile_picture.url }}">
+                        <span >{{c.member.username}}</span>
+                        <span id="date-selector">{{c.date|date:"M d, Y"}}</span>
 
-            {% else %}
-            <p>Keywords: {{ project.keyword_list }}</p>
-            {% endif %}
+                    </div>
+                    <span class="msg-content-receiver" >{{c.comment}}</span>
+                {% endfor %}
 
-            <p>Date posted: {{ project.post_date }}</p>
-
-            <p id="likePara">Number of likes: {{ project.likes }}</p>
-
-            <div id="buttonsDiv">
-                {% if user.is_authenticated %}
-                <button aria-label="Click to like project" tabindex="0" class="buttons" id="likeBtn" type="submit">Like</button>
-                <button aria-label="Click to submit rating" class="buttons" id="ratingBtn" type="submit">Submit Rating</button>
-                {% endif %}
-
-                {% if user.is_superuser %}
-
-                <button aria-label="Click to flag project" class="buttons" id="flagBtn" type="submit">Flag</button> <!-- add view to change status -->
-                {% endif %}
-            </div>
-
-      </section>
+             </section>
+        </div>
+        {% endif %}
     </div>
-
     {% endblock content %}
 </body>
