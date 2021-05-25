@@ -10,9 +10,9 @@ from .forms import MessageForm
 from django.contrib import messages as django_messages
 
 
-# Yassine Ibhir
 # Lists all users and add an attribute as number of
 # unread messages sent to the current user. This will be used a notice.
+# @author Yassine Ibhir
 class UserMessageListView(LoginRequiredMixin, ListView):
     Model = User
     template_name = 'message_app/user_list_message.html'
@@ -27,10 +27,10 @@ class UserMessageListView(LoginRequiredMixin, ListView):
         return users_with_msgs_num
 
 
-# Yassine Ibhir
 # This methods access the Message model
 # to get the numbers of unread messages
 # and then appends it to the list and returns it
+# @author Yassine Ibhir
 def appendNumberOfMsgs(users, login_user):
     users_with_num_messages = []
     for u in users:
@@ -38,7 +38,6 @@ def appendNumberOfMsgs(users, login_user):
         users_messages = Message.objects.filter(Q(receiver=login_user, sender=u))
         # we count the number of unread messages
         num_of_unread_msg = users_messages.filter(is_read=False).count()
-        print(num_of_unread_msg)
         # we add the attribute if it's not 0
         if num_of_unread_msg > 0:
             u.un_read = num_of_unread_msg
@@ -50,15 +49,17 @@ def appendNumberOfMsgs(users, login_user):
     return users_with_num_messages
 
 
+# @ Yassine Ibhir
+# this function returns a json response containing
+# the number of unread messages for the logged in user.
 def getUnreadMsgs(request):
     users_messages = Message.objects.filter(Q(receiver=request.user))
     # we count the number of unread messages
     num_of_unread_msg = users_messages.filter(is_read=False).count()
 
-    context = {"unread_msgs" : num_of_unread_msg}
+    context = {"unread_msgs": num_of_unread_msg}
 
     return JsonResponse(context, safe=False)
-
 
 
 # Yassine Ibhir
@@ -91,7 +92,7 @@ def UserToUserMessageRoom(request, pk):
         # and redirect to the contact/messages page with a success django message
         if message_form.is_valid():
             message = message_form.cleaned_data.get('message')
-            Message.objects.create(sender=request.user, receiver=alternate_user, message=message)
+            newMessage = Message.objects.create(sender=request.user, receiver=alternate_user, message=message)
             django_messages.success(request,
                                     'Message sent to {0} '.format
                                     (alternate_user.first_name + ' ' + alternate_user.last_name))
@@ -100,7 +101,8 @@ def UserToUserMessageRoom(request, pk):
             django_messages.error(request,
                                   'Could not send message to  {0} '.format
                                   (alternate_user.first_name + ' ' + alternate_user.last_name))
-        return redirect('user-msgs')
+
+        return redirect(newMessage.get_absolute_url())
     # no post request
     else:
         message_form = MessageForm()

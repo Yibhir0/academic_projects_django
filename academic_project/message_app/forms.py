@@ -19,11 +19,9 @@ class MessageForm(forms.ModelForm):
 # Yassine Ibhir
 # This class creates a form for The comments
 class CommentForm(forms.ModelForm):
-    comment = forms.CharField(label="", widget=forms.Textarea(
+    comment = forms.CharField(label="", widget=forms.TextInput(
         attrs={
             'placeholder': 'Write a comment',
-            'rows': 4,
-            'cols': 30
         }
     ))
 

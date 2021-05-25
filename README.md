@@ -1,6 +1,8 @@
 HOW TO RUN: Before running the project, please provide the username and password of your database in the DatabaseEnvs file,
 located in academic_project. Then proceed to run manage.py from the academic_project application directory.
 
+Heroku URL:
+
 INFO:
 Project 2 - A fully fledged Django Project Website 
 

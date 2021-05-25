@@ -145,16 +145,22 @@ form{
 .msg-content-receiver{font-weight: normal;overflow-wrap: break-word;word-wrap: break-word;max-width:37%;
                 background-color:#99cccc;border-radius:1em;}
 .msg-txt{margin:auto;}
-#id_message{width: 30em;height:1.6em;}
+#id_message,#id_comment{width: 30em;height:1.6em;margin-right:2px;}
 .btn-border{border: 1px solid lightgrey;background-color:#7193ff;}
-#send-msg{background-color:#7193ff;color:white;font-weight:bold;border: 1px solid #7193ff;}
+#send-msg{background-color:#7193ff;color:white;font-weight:bold;border: 1px solid #7193ff;width:100%;}
 #msg-img{width: 30px;height:30px;border-radius:50%;}
-
+.message-scroll-bar{
+  width: 510px;
+  height: 395px;
+  overflow: hidden;
+  overflow-y: scroll;
+  display:flex;
+  flex-direction:column;
+  border: 1px solid lightgrey;}
 /** project detail view styles **/
 #mainContainer {
-    margin-top: 1%;
-    margin-left: 30%;
     width: 40%;
+    height: 110px;
     font-size: 17px;
     display: flex;
     align-items: flex-start;
@@ -195,7 +201,8 @@ h2{
 
 #rating{
     color: darkgoldenrod;
-    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 #projImg{
@@ -236,10 +243,6 @@ h2{
     color: #ff00ba;
 }
 
-#projectURL{
-    margin-top: 40px;
-}
-
 /** home page styles **/
 #projTitle, #home-page {
     padding-left: 5px;
@@ -274,4 +277,13 @@ h2{
 #num-authors-para{
     margin-top: 5em;
     font-weight: normal;
+}
+
+.detail-container{display:flex;align-items: center;justify-content: space-evenly;}
+.comment-container{display:flex;align-items: center;flex-direction:column;justify-content: space-evenly;}
+.comment-scroll-bar{
+  width: 400px;
+  height: 200px;
+  overflow: hidden;
+  overflow-y: scroll;
 }

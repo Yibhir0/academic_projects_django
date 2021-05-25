@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from .DatabaseEnvVars import DB_NAME, DB_USER, DB_PASSWORD
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,7 +54,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'academic_project.urls'
-import os
 
 TEMPLATES = [
     {
@@ -82,9 +82,6 @@ DATABASES = {
         'NAME': DB_NAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
-        # 'NAME': 'academic_project',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'project',
         'HOST': 'localhost',
         'PORT': '5432',
     }

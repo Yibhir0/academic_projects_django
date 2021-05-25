@@ -2,6 +2,10 @@ from django.urls import path
 
 from . import views
 
+# Urls of the main application. Item_app has a url for the home page and about page.
+# It also contains references to the project page and forms responsible for handling user actions on a project
+# (adding, updating, deleting a project, and filtering a list of projects).
+# @author Yassine Ibhir
 urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.AboutPageView.as_view(), name='about'),
