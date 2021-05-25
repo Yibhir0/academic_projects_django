@@ -195,7 +195,8 @@ h2{
 
 #rating{
     color: darkgoldenrod;
-    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 #projImg{
@@ -234,10 +235,6 @@ h2{
     background: #4e46cf;
     border: solid 1px #ff00ba;
     color: #ff00ba;
-}
-
-#projectURL{
-    margin-top: 40px;
 }
 
 /** home page styles **/
