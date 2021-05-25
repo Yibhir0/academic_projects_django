@@ -1,0 +1,62 @@
+# Notes for checking the Users and Groups
+from django.contrib.auth.models import User, Group, Permission
+from django.contrib.contenttypes.models import ContentType
+
+item_app_ct = ContentType.objects.get(app_label='item_app', model='Project')
+can_view_projects = Permission(name='Can View', codename='can_view_projects', content_type=item_app_ct)
+can_view_projects.save()
+
+
+
+
+if django_user.groups.filter(name="admin_gp").exists():
+    ...:     print(django_user)
+
+
+grps = Group.objects.filter(user = request.user)
+for g in grps:
+    ...:     print(g.name)
+
+http://web.archive.org/web/20130205133031/http://parand.com/say/index.php/2010/02/19/django-using-the-permission-system/
+from django.contrib.auth.models import Group, Permission
+special_users = Group(name='Special Users')
+special_users.save()
+really_special_users = Group(name='Super Special Users')
+really_special_users.save()
+
+from django.contrib.contenttypes.models import ContentType
+somemodel_ct = ContentType.objects.get(app_label='myapp', model='somemodel')
+
+can_view = Permission(name='Can View', codename='can_view_something',
+                       content_type=somemodel_ct)
+can_view.save()
+
+can_modify = Permission(name='Can Modify', codename='can_modify_something',
+                       content_type=somemodel_ct)
+can_modify.save()
+
+special_users.permissions.add(can_view)
+really_special_users.permissions = [can_view, can_modify]
+
+jack=User.objects.get(email='jack@test.com')
+jack.groups.add(special_users)
+
+jill=User.objects.get(email='jill@test.com')
+jill.groups.add(really_special_users)
+
+# Check in shell
+>>> jack.has_perm('myapp.can_view_something')
+True
+>>> jack.has_perm('myapp.can_modify_something')
+False
+
+>>> jill.has_perm('myapp.can_view_something')
+True
+>>> jill.has_perm('myapp.can_modify_something')
+True
+
+{% if perms.myapp.can_view_something %}
+Here is something for you to see.
+{% else %}
+Can't show you!
+{% endif %}
