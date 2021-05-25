@@ -19,7 +19,7 @@
             {% for user in users_list %}
                 <div class="horizontal-container">
                     <div class="align-vertical">User :{{ user.username }}</div>
-                    <div class="align-vertical">Group :{{ user.groups.name }}</div>
+                    <div class="align-vertical">Group :{{ user.group }}</div>
 
                     <div class="align-vertical">
                         <span ><a class="update-link" href="{% url 'user-update' user.id %}">Update</a></span>
