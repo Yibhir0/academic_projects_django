@@ -13,11 +13,12 @@
 				type="text/css"
 				href="{% static 'css/styles.css' %}">
 
-		{% block scriptTitle %}
 		<script defer src="{% static 'javascript/main.js' %}"></script>
+		<script defer src="{% static 'javascript/projectDetailSite.js' %}"></script>
 
+		{% block title %}
 	  	<title>Academic Project</title>
-		{% endblock scriptTitle %}
+		{% endblock title %}
 	</head>
 
 	<body>

@@ -1,12 +1,12 @@
-# Yassine Ibhir
-# urls for user_app
 from django.urls import path
 from django.contrib.auth.views import (
     PasswordResetView,PasswordResetConfirmView )
 
 from . import views
 
-
+# Urls for the user_app. They include links to the several pages, including
+# register, login, logout, update and password reset.
+# @author Yassine Ibhir
 urlpatterns = [
     path('user_register/', views.register, name='user-register'),
     path('user_login/', views.UserLoginView.as_view(), name ='user-login'),

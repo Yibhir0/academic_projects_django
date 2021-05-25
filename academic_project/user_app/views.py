@@ -12,8 +12,8 @@ from .models import Member
 from django.contrib.auth.decorators import login_required
 
 
-# Yassine Ibhir
 # validates and registers user
+# @author Yassine Ibhir
 def register(request):
     if request.method == 'POST':
         register_form = UserRegistrationForm(request.POST)
@@ -43,17 +43,17 @@ def register(request):
     return render(request, template_name, context)
 
 
-# Yassine Ibhir
 # Inherits from LoginView and SuccessMessageMixin
 # to login a user and provide a message
+# @author Yassine Ibhir
 class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = 'user_app/login.html'
     success_message = 'You are logged in, Welcome.'
 
 
-# Yassine Ibhir
 # Inherits from LogoutView and overrides dispatch to add a message
 # when user is logged out
+# @author Yassine Ibhir
 class UserLogoutView(LogoutView):
 
     def dispatch(self, request, *args, **kwargs):
@@ -62,10 +62,9 @@ class UserLogoutView(LogoutView):
         return response
 
 
-# Yassine Ibhir
 # using PasswordResetDone View we will create our own class
 # to override dispatch method to add a message.
-
+# @author Yassine Ibhir
 class UserPasswordResetDoneView(PasswordResetDoneView):
     template_name = 'user_app/password_reset_done.html'
 
@@ -75,9 +74,9 @@ class UserPasswordResetDoneView(PasswordResetDoneView):
         return response
 
 
-# Yassine Ibhir
 # using PasswordResetCompleteView we will create our own class
 # that displays a message to the user.
+# @author Yassine Ibhir
 class UserPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'user_app/password_reset_complete.html'
 
@@ -87,8 +86,8 @@ class UserPasswordResetCompleteView(PasswordResetCompleteView):
         return response
 
 
-# Yassine Ibhir
 #  member's profile view
+# @author Yassine Ibhir
 @login_required(login_url='/user_app/user_login/')
 def viewProfile(request):
     template_name = 'user_app/profile.html'
@@ -96,8 +95,8 @@ def viewProfile(request):
     return render(request, template_name, context)
 
 
-# Yassine Ibhir
 # Update member profile
+# @author Yassine Ibhir
 @login_required(login_url='/user_app/user_login/')
 def updateProfile(request):
     if request.method == 'POST':
