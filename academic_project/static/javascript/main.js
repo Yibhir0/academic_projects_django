@@ -43,3 +43,6 @@ function setNotification(obj){
 
 }
 
+// Project comment/like/rate functionalities
+
+

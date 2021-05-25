@@ -15,7 +15,13 @@ class Comment(models.Model):
     member = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
 
+    class Meta:
+        ordering = ['-date']
 
+
+# This class represents the Message model
+# and its attributes
+# @author Yassine Ibhir
 class Message(models.Model):
     sender = models.ForeignKey(User, related_name="msg_sender", on_delete=models.CASCADE)
     receiver = models.ForeignKey(User, related_name="msg_receiver", on_delete=models.CASCADE)

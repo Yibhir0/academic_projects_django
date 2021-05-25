@@ -1,7 +1,9 @@
 from django.core.validators import ValidationError
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
+
 
 # This method validates that the user rating is a positive decimal number and it is not greater than 5 (maximum).
 # @author David Pizzolongo
@@ -10,6 +12,7 @@ def checkRating(rating):
         raise ValidationError("Rating can only be a positive number.")
     if rating > 5:
         raise ValidationError("Rating cannot exceed 5 stars.")
+
 
 # The Project model contains projects published by a member.
 # Its entities include the member's name, project name, type, keyword_list and status, as well as
@@ -31,3 +34,6 @@ class Project(models.Model):
     def __str__(self):
         # returns the project's name as its identifier
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('project-detail',kwargs={'pk': self.pk})

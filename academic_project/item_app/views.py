@@ -1,15 +1,20 @@
 from urllib import request
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Project
-from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from message_app.models import Comment
+from message_app.forms import CommentForm
+
+
 
 # Yassine Ibhir
 # render the home page
 def home(request):
     return render(request, 'item_app/index.html')
+
 
 # @author David Pizzolongo
 class AboutPageView(TemplateView):
@@ -33,7 +38,8 @@ class AboutPageView(TemplateView):
         list_authors.append("Aharon Moryoussef 1732787 aMoryoussef@gmail.com")
         return list_authors
 
-# Yassine Ibhir
+
+# @Yassine Ibhir
 # Class based view that handles the Project list using pagination.
 # Note that we don't need to override the get_queryset since
 # ListView returns all the objects in the model but we are doing it
@@ -50,13 +56,35 @@ class ProjectListView(ListView):
 
 
 # Yassine Ibhir
-# Class based view that handles the view of one project.
-# all we need to do is pass the primary key with the url when user
-# clicks the project and the rest is handled by Django DetailView class.
+# this function handles the details of one project and the comments.
 
-class ProjectDetailView(DetailView):
-    model = Project
+def project_detail(request,pk):
+
+    project = get_object_or_404(Project, pk=pk)
+    comments = Comment.objects.filter(project=project).order_by('-date')
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.cleaned_data.get('comment')
+            new_comment = Comment.objects.create(comment=comment,project=project,member=request.user)
+            new_comment.save()
+            messages.success(request, 'Comment is added,Thanks.')
+            return redirect(project.get_absolute_url())
+        else :
+            messages.error(request, 'Sorry, your comment was not added.')
+    else:
+        comment_form = CommentForm()
+
+    context = {'comments' : comments,
+               'project' : project,
+               'form' : comment_form}
+
     template_name = 'item_app/project_detail.html'
+
+    return render(request,template_name,context);
+
+
 
 
 # Yassine Ibhir

@@ -5,14 +5,10 @@
         <meta name="author" content="David Pizzolongo">
     {% endblock heading %}
 
-    {% block scriptTitle %}
-        {% load static %}
-        <script defer src="{% static 'javascript/projectDetailSite.js' %}"></script>
-        <script defer src="{% static 'javascript/main.js' %}"></script>
+
 
         <title>Project Details</title>
-    {% endblock scriptTitle %}
-</head>
+
 
 <body>
     {% block content %}
@@ -59,6 +55,18 @@
             <p id="projectURL"> Go to <a href="{{ project.url }}"> Project URL. </a> </p>
       </section>
     </div>
+     <section class="form-container">
+            <form method="post">
+                {% csrf_token%}
+
+                    {{form}}
+
+                <span class="btn-post">
+                    <button  type="submit">Comment</button>
+                </span>
+            </form>
+
+     </section>
 
     {% endblock content %}
 </body>
