@@ -10,7 +10,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from .models import Member
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import Group
 
 # validates and registers user
 # @author Yassine Ibhir
@@ -31,6 +31,9 @@ def register(request):
 
             customer_profile.save()
             messages.success(request, 'Congratulations {0}, You are registered'.format(username))
+
+            members_group = Group.objects.get(name='members')
+            members_group.user_set.add(new_customer)
             return redirect('user-login')
         else:
             messages.error(request, "Unsuccessful registration. Invalid information.")
