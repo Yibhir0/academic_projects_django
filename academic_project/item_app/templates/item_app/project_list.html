@@ -29,12 +29,20 @@
             <div class="vertical-container">
             {% for project in project_list %}
                 <div class="horizontal-container">
-                    <div class="align-vertical"><img src="{{project.snapshot.url}}"> </div>
+                     <div class="align-vertical">
+                        <span id="date-selector">{{ project.post_date|date:"M d, Y" }}</span>
+                        <span> <img src="{{project.snapshot.url}}"> </span>
+                    </div>
                     <div class="align-vertical">Name :{{project.name}}</div>
                     <div class="align-vertical">Keyword :{{project.keyword_list}}</div>
                     <div class="align-vertical">Owner :{{project.member}}</div>
                     <div class="align-vertical" ><a class="detail-link" href="{% url 'project-detail' project.id %}">details</a></div>
-                    <div class="align-vertical" id="date-selector">{{project.post_date}}</div>
+                     {% if  user.is_superuser %}
+                    <div class="align-vertical">
+                        <span ><a class="update-link" href="{% url 'project-update' project.id %}">Update</a></span>
+                        <span><a class= "delete-link" href="{% url 'project-delete' project.id %}">Delete</a></span>
+                    </div>
+                    {% endif %}
                 </div>
             {% endfor %}
             </div>

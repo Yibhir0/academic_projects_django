@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from .DatabaseEnvVars import DB_NAME, DB_USER, DB_PASSWORD
 import os
-
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,12 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-bykshg!#u^!6nqvf+-_p6s&pv9qtd)^+lk95$!6o)si14!k$53'
+SECRET_KEY = os.environ['SECRET_KEY']
+# '6cc37e875d90e6db451bd413c037f7def31ac7d2d316a7fd007813c49af7e1cd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ['DEBUG'] == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dw-42021-prj-grp8-pizzolongo.herokuapp.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -142,5 +143,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'yassineibhir899@gmail.com'
-EMAIL_HOST_PASSWORD = 'Python#420'
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+
+
+django_heroku.settings(locals())
