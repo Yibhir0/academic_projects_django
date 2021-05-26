@@ -1,1 +1,1 @@
-web: gunicorn academic_project.academic_project.wsgi
+web: gunicorn academic_project/academic_project.wsgi
